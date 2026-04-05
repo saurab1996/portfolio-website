@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-tertiary: rgb(84 92 114);
+  --color-surface-dim: rgb(216 218 220);
+  --color-primary-container: rgb(96 99 238);
+  --color-primary: rgb(70 72 212);
+  --color-on-tertiary: rgb(255 255 255);
+  --color-tertiary-container: rgb(108 116 139);
+  --color-on-surface: rgb(25 28 30);
+  --color-background: rgb(247 249 251);
+  --color-surface-bright: rgb(247 249 251);
+  --color-surface-container-high: rgb(230 232 234);
+  --color-on-error: rgb(255 255 255);
+  --color-on-primary-fixed: rgb(7 0 108);
+  --color-error-container: rgb(255 218 214);
+  --color-tertiary-fixed-dim: rgb(190 198 224);
+  --color-secondary-fixed-dim: rgb(76 215 246);
+  --color-outline: rgb(118 117 134);
+  --color-on-tertiary-fixed: rgb(19 27 46);
+  --color-tertiary-fixed: rgb(218 226 253);
+  --color-surface: rgb(247 249 251);
+  --color-inverse-surface: rgb(45 49 51);
+  --color-inverse-on-surface: rgb(239 241 243);
+  --color-on-secondary-fixed-variant: rgb(0 78 92);
+  --color-on-error-container: rgb(147 0 10);
+  --color-secondary-container: rgb(87 223 254);
+  --color-on-tertiary-fixed-variant: rgb(63 70 92);
+  --color-on-secondary-container: rgb(0 97 114);
+  --color-surface-container-lowest: rgb(255 255 255);
+  --color-secondary: rgb(0 104 122);
+  --color-surface-variant: rgb(224 227 229);
+  --color-on-primary: rgb(255 255 255);
+  --color-on-surface-variant: rgb(70 69 84);
+  --color-on-secondary-fixed: rgb(0 31 38);
+  --color-on-primary-container: rgb(255 251 255);
+  --color-error: rgb(186 26 26);
+  --color-surface-container-low: rgb(242 244 246);
+  --color-on-secondary: rgb(255 255 255);
+  --color-outline-variant: rgb(199 196 215);
+  --color-on-tertiary-container: rgb(254 252 255);
+  --color-primary-fixed: rgb(225 224 255);
+  --color-surface-tint: rgb(73 75 214);
+  --color-surface-container: rgb(236 238 240);
+  --color-primary-fixed-dim: rgb(192 193 255);
+  --color-on-primary-fixed-variant: rgb(47 46 190);
+  --color-inverse-primary: rgb(192 193 255);
+  --color-secondary-fixed: rgb(172 237 255);
+  --color-surface-container-highest: rgb(224 227 229);
+  --color-on-background: rgb(25 28 30);
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  /* Fonts */
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-label: 'Inter', sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(
+    to bottom right,
+    var(--color-primary-container),
+    var(--color-primary)
+  );
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.full-width {
+  @apply relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw];
+  width: 100dvw;
+  max-width: 100dvw;
+}
+
+.content-width {
+  @apply max-w-[1024px] mx-auto;
+}
+
+text {
+  font-family: var(--font-headline);
+}
