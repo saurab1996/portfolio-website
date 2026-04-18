@@ -1,3 +1,4 @@
+import type { WithContext, Thing } from 'schema-dts';
 export type SEOMeta = {
   title: string;
   description: string;
@@ -5,3 +6,5 @@ export type SEOMeta = {
   ogImage?: string;
   canonical?: string;
 };
+
+export type PageSchema = WithContext<Thing>;

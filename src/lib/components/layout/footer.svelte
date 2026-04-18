@@ -1,0 +1,44 @@
+<script lang="ts">
+  const year = new Date().getFullYear();
+  import { Logo } from '$lib/components/ui';
+  import {
+    FooterNavigation,
+    SocialMediaNavigation,
+  } from '$lib/components/navigation';
+</script>
+
+<footer class="full-width px-4 lg:px-0 py-5 bg-surface-container-low mt-auto">
+  <div class="content-width">
+    <!-- Top -->
+    <div
+      class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-8"
+    >
+      <!-- Logo -->
+      <div class="md:block flex justify-center md:justify-start">
+        <Logo />
+      </div>
+
+      <!-- Nav -->
+      <div class="md:block flex justify-center">
+        <FooterNavigation />
+      </div>
+    </div>
+
+    <div class="w-full h-px bg-outline-variant mb-8"></div>
+
+    <!-- Bottom -->
+    <div
+      class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between items-center"
+    >
+      <div class="flex gap-4 justify-center md:justify-start">
+        <SocialMediaNavigation />
+      </div>
+
+      <p
+        class="text-on-surface-variant text-sm tracking-tight text-center md:text-right"
+      >
+        © {year} Saurab Gupta. Crafted with precision.
+      </p>
+    </div>
+  </div>
+</footer>

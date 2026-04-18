@@ -17,3 +17,5 @@ export type ParsedStat = {
   numeric: number | null;
   suffix: string;
 };
+
+export type ThemeMode = 'light' | 'dark';

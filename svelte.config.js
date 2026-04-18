@@ -1,5 +1,11 @@
 import adapter from '@sveltejs/adapter-static';
 import { relative, sep } from 'node:path';
+import { loadEnv } from 'vite';
+
+const mode = process.env.NODE_ENV || 'development';
+
+// load ALL env (no prefix filter)
+const env = loadEnv(mode, process.cwd(), '');
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -21,12 +27,13 @@ const config = {
       pages: 'build/html', // output dir
       assets: 'build',
       fallback: undefined,
+      precompress: true,
     }),
     output: {
       bundleStrategy: 'single',
     },
     paths: {
-      assets: 'https://cdn.saurabgupta.in',
+      assets: env.USE_CDN_ASSETS === 'true' ? env.PUBLIC_CDN_URL : undefined,
     },
     appDir: 'assets',
   },

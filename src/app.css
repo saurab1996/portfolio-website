@@ -1,98 +1,270 @@
 @import 'tailwindcss';
+@import 'shadcn-svelte/tailwind.css';
+@import 'tw-animate-css';
+
+@font-face {
+  font-family: 'Inter Variable';
+  src: url(https://cdn.saurabgupta.in/fonts/inter-v20-latin-regular.woff2)
+    format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Variable';
+  src: url(https://cdn.saurabgupta.in/fonts/inter-v20-latin-700.woff2)
+    format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
 
 @theme {
-  --color-tertiary: rgb(84 92 114);
-  --color-surface-dim: rgb(216 218 220);
-  --color-primary-container: rgb(96 99 238);
-  --color-primary: rgb(70 72 212);
-  --color-on-tertiary: rgb(255 255 255);
-  --color-tertiary-container: rgb(108 116 139);
-  --color-on-surface: rgb(25 28 30);
-  --color-background: rgb(247 249 251);
-  --color-surface-bright: rgb(247 249 251);
-  --color-surface-container-high: rgb(230 232 234);
-  --color-on-error: rgb(255 255 255);
-  --color-on-primary-fixed: rgb(7 0 108);
-  --color-error-container: rgb(255 218 214);
-  --color-tertiary-fixed-dim: rgb(190 198 224);
-  --color-secondary-fixed-dim: rgb(76 215 246);
-  --color-outline: rgb(118 117 134);
-  --color-on-tertiary-fixed: rgb(19 27 46);
-  --color-tertiary-fixed: rgb(218 226 253);
-  --color-surface: rgb(247 249 251);
-  --color-inverse-surface: rgb(45 49 51);
-  --color-inverse-on-surface: rgb(239 241 243);
-  --color-on-secondary-fixed-variant: rgb(0 78 92);
-  --color-on-error-container: rgb(147 0 10);
-  --color-secondary-container: rgb(87 223 254);
-  --color-on-tertiary-fixed-variant: rgb(63 70 92);
-  --color-on-secondary-container: rgb(0 97 114);
-  --color-surface-container-lowest: rgb(255 255 255);
-  --color-secondary: rgb(0 104 122);
-  --color-surface-variant: rgb(224 227 229);
-  --color-on-primary: rgb(255 255 255);
-  --color-on-surface-variant: rgb(70 69 84);
-  --color-on-secondary-fixed: rgb(0 31 38);
-  --color-on-primary-container: rgb(255 251 255);
-  --color-error: rgb(186 26 26);
-  --color-surface-container-low: rgb(242 244 246);
-  --color-on-secondary: rgb(255 255 255);
-  --color-outline-variant: rgb(199 196 215);
-  --color-on-tertiary-container: rgb(254 252 255);
-  --color-primary-fixed: rgb(225 224 255);
-  --color-surface-tint: rgb(73 75 214);
-  --color-surface-container: rgb(236 238 240);
-  --color-primary-fixed-dim: rgb(192 193 255);
-  --color-on-primary-fixed-variant: rgb(47 46 190);
-  --color-inverse-primary: rgb(192 193 255);
-  --color-secondary-fixed: rgb(172 237 255);
-  --color-surface-container-highest: rgb(224 227 229);
-  --color-on-background: rgb(25 28 30);
-  --radius: 0.125rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.5rem;
-  --radius-full: 0.75rem;
+  --color-md-tertiary: rgb(84 92 114);
+  --color-md-surface-dim: rgb(216 218 220);
+  --color-md-primary-container: rgb(96 99 238);
+  --color-md-primary: rgb(70 72 212);
+  --color-md-on-tertiary: rgb(255 255 255);
+  --color-md-tertiary-container: rgb(108 116 139);
+  --color-md-on-surface: rgb(25 28 30);
+  --color-md-background: rgb(247 249 251);
+  --color-md-surface-bright: rgb(247 249 251);
+  --color-md-surface-container-high: rgb(230 232 234);
+  --color-md-on-error: rgb(255 255 255);
+  --color-md-on-primary-fixed: rgb(7 0 108);
+  --color-md-error-container: rgb(255 218 214);
+  --color-md-tertiary-fixed-dim: rgb(190 198 224);
+  --color-md-secondary-fixed-dim: rgb(76 215 246);
+  --color-md-outline: rgb(118 117 134);
+  --color-md-on-tertiary-fixed: rgb(19 27 46);
+  --color-md-tertiary-fixed: rgb(218 226 253);
+  --color-md-surface: rgb(247 249 251);
+  --color-md-inverse-surface: rgb(45 49 51);
+  --color-md-inverse-on-surface: rgb(239 241 243);
+  --color-md-on-secondary-fixed-variant: rgb(0 78 92);
+  --color-md-on-error-container: rgb(147 0 10);
+  --color-md-secondary-container: rgb(87 223 254);
+  --color-md-on-tertiary-fixed-variant: rgb(63 70 92);
+  --color-md-on-secondary-container: rgb(0 97 114);
+  --color-md-surface-container-lowest: rgb(255 255 255);
+  --color-md-secondary: rgb(0 104 122);
+  --color-md-surface-variant: rgb(224 227 229);
+  --color-md-on-primary: rgb(255 255 255);
+  --color-md-on-surface-variant: rgb(70 69 84);
+  --color-md-on-secondary-fixed: rgb(0 31 38);
+  --color-md-on-primary-container: rgb(255 251 255);
+  --color-md-error: rgb(186 26 26);
+  --color-md-surface-container-low: rgb(242 244 246);
+  --color-md-on-secondary: rgb(255 255 255);
+  --color-md-outline-variant: rgb(199 196 215);
+  --color-md-on-tertiary-container: rgb(254 252 255);
+  --color-md-primary-fixed: rgb(225 224 255);
+  --color-md-surface-tint: rgb(73 75 214);
+  --color-md-surface-container: rgb(236 238 240);
+  --color-md-primary-fixed-dim: rgb(192 193 255);
+  --color-md-on-primary-fixed-variant: rgb(47 46 190);
+  --color-md-inverse-primary: rgb(192 193 255);
+  --color-md-secondary-fixed: rgb(172 237 255);
+  --color-md-surface-container-highest: rgb(224 227 229);
+  --color-md-on-background: rgb(25 28 30);
 
-  /* Fonts */
-  --font-headline: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-label: 'Inter', sans-serif;
+  /* ── Radius scale ─────────────────────────────────────────────────── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Typography ───────────────────────────────────────────────────── */
+  --font-inter: 'Inter Variable';
+
+  /* ── shadcn passthroughs ──────────────────────────────────────────── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ── Custom semantic passthroughs ────────────────────────────────── */
+  --color-surface-container-low: var(--surface-container-low);
+  --color-outline-variant: var(--outline-variant);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-accent-teal: var(--accent-teal);
+
+  --shadow-glass: var(--shadow-glass);
 }
 
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 300,
-    'GRAD' 0,
-    'opsz' 24;
+:root {
+  /* shadcn tokens */
+  --background: rgb(255 255 255);
+  --foreground: rgb(10 10 10);
+  --card: rgb(255 255 255);
+  --card-foreground: rgb(10 10 10);
+  --popover: rgb(255 255 255);
+  --popover-foreground: rgb(10 10 10);
+  --primary: rgb(99 102 241);
+  --primary-foreground: rgb(255 255 255);
+  --secondary: rgb(245 245 245);
+  --secondary-foreground: rgb(26 26 26);
+  --muted: rgb(245 245 245);
+  --muted-foreground: rgb(115 115 115);
+  --accent: rgb(245 245 245);
+  --accent-foreground: rgb(26 26 26);
+  --destructive: rgb(239 68 68);
+  --border: rgb(229 229 229);
+  --input: rgb(229 229 229);
+  --ring: rgb(161 161 161);
+  --chart-1: rgb(212 212 212);
+  --chart-2: rgb(115 115 115);
+  --chart-3: rgb(82 82 82);
+  --chart-4: rgb(64 64 64);
+  --chart-5: rgb(38 38 38);
+  --radius: 0.625rem;
+  --sidebar: rgb(250 250 250);
+  --sidebar-foreground: rgb(10 10 10);
+  --sidebar-primary: rgb(26 26 26);
+  --sidebar-primary-foreground: rgb(250 250 250);
+  --sidebar-accent: rgb(245 245 245);
+  --sidebar-accent-foreground: rgb(26 26 26);
+  --sidebar-border: rgb(229 229 229);
+  --sidebar-ring: rgb(161 161 161);
+
+  /* custom semantic tokens */
+  --surface-container-low: rgb(242 244 246);
+  --outline-variant: rgb(199 196 215);
+  --on-surface: rgb(25 28 30);
+  --on-surface-variant: rgb(70 69 84);
+  --accent-teal: rgb(0 104 122);
+  --shadow-glass: 0 4px 24px rgba(99, 102, 241, 0.06);
+  --scrollbar-width: 15px;
 }
 
+.dark {
+  /* shadcn tokens */
+  --background: rgb(10 10 10);
+  --foreground: rgb(250 250 250);
+  --card: rgb(26 26 26);
+  --card-foreground: rgb(250 250 250);
+  --popover: rgb(26 26 26);
+  --popover-foreground: rgb(250 250 250);
+  --primary: rgb(99 102 241);
+  --primary-foreground: rgb(255 255 255);
+  --secondary: rgb(38 38 38);
+  --secondary-foreground: rgb(250 250 250);
+  --muted: rgb(38 38 38);
+  --muted-foreground: rgb(163 163 163);
+  --accent: rgb(38 38 38);
+  --accent-foreground: rgb(250 250 250);
+  --destructive: rgb(248 113 113);
+  --border: rgb(255 255 255 / 10%);
+  --input: rgb(255 255 255 / 15%);
+  --ring: rgb(115 115 115);
+  --chart-1: rgb(212 212 212);
+  --chart-2: rgb(115 115 115);
+  --chart-3: rgb(82 82 82);
+  --chart-4: rgb(64 64 64);
+  --chart-5: rgb(38 38 38);
+  --sidebar: rgb(26 26 26);
+  --sidebar-foreground: rgb(250 250 250);
+  --sidebar-primary: rgb(99 102 241);
+  --sidebar-primary-foreground: rgb(255 255 255);
+  --sidebar-accent: rgb(38 38 38);
+  --sidebar-accent-foreground: rgb(250 250 250);
+  --sidebar-border: rgb(255 255 255 / 10%);
+  --sidebar-ring: rgb(115 115 115);
+
+  /* custom semantic tokens */
+  --surface-container-low: rgb(30 33 35);
+  --outline-variant: rgb(68 65 84);
+  --on-surface: rgb(225 227 229);
+  --on-surface-variant: rgb(196 195 210);
+  --accent-teal: rgb(76 215 246);
+  --shadow-glass: 0 4px 24px rgba(99, 102, 241, 0.09);
+}
+
+/* ─────────────────────────────────────────────────────────────────────── */
+/* Base layer                                                              */
+/* ─────────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-inter;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+  }
+  html::-webkit-scrollbar {
+    width: var(--scrollbar-width); /* Chrome/Edge/Safari — exact px */
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+    overflow-x: hidden;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-inter);
+  }
+  /* SVG text elements */
+  text {
+    font-family: var(--font-inter);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────── */
+/* Utility classes                                                         */
+/* ─────────────────────────────────────────────────────────────────────── */
 .bg-primary-gradient {
   background: linear-gradient(
     to bottom right,
-    var(--color-primary-container),
-    var(--color-primary)
+    var(--color-md-primary-container),
+    var(--color-md-primary)
   );
 }
 
-html {
-  overflow-x: hidden;
-}
-
-body {
-  overflow-x: hidden;
-}
-
 .full-width {
-  @apply relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw];
-  width: 100dvw;
-  max-width: 100dvw;
+  width: calc(100dvw - var(--scrollbar-width, 0px));
+  max-width: calc(100dvw - var(--scrollbar-width, 0px));
+  margin-left: calc(-50dvw + 50% + var(--scrollbar-width, 0px) / 2);
+  margin-right: calc(-50dvw + 50% + var(--scrollbar-width, 0px) / 2);
 }
 
 .content-width {
-  @apply max-w-[1024px] mx-auto;
-}
-
-text {
-  font-family: var(--font-headline);
+  @apply max-w-5xl mx-auto px-4 lg:px-0;
 }
