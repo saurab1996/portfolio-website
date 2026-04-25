@@ -1,5 +1,5 @@
 <script>
-  import { StatsGrid } from '$lib/components/data-display';
+  import { StatsGrid } from "$lib/components/data-display";
 </script>
 
 <section class="flex flex-col gap-6">

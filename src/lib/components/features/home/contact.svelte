@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { ContactForm } from '$lib/components/forms';
-  import { ExternalLink, GlassCard } from '$lib/components/ui';
-  import { EMAIL_ADDRESS, LINKEDIN_ADDRESS } from '$lib/config';
-  import { User, Mail } from '@lucide/svelte';
+  import { ContactForm } from "$lib/components/forms";
+  import { ExternalLink, GlassCard } from "$lib/components/ui";
+  import { EMAIL_ADDRESS, LINKEDIN_ADDRESS } from "$lib/config";
+  import User from "@lucide/svelte/icons/user";
+  import Mail from "@lucide/svelte/icons/mail";
 </script>
 
 <section class="full-width bg-surface-container-low py-20" id="contact">
@@ -48,7 +49,7 @@
 
             <ExternalLink
               href={`mailto:${EMAIL_ADDRESS}`}
-              class="font-medium text-primary hover:opacity-80 transition"
+              class="text-sm font-semibold text-primary break-all"
             >
               {EMAIL_ADDRESS}
             </ExternalLink>
@@ -60,7 +61,7 @@
 
             <ExternalLink
               href={LINKEDIN_ADDRESS}
-              class="font-medium text-primary hover:opacity-80 transition"
+              class="text-sm font-semibold text-primary break-all"
             >
               {LINKEDIN_ADDRESS}
             </ExternalLink>

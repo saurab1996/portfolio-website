@@ -18,4 +18,9 @@ export type ParsedStat = {
   suffix: string;
 };
 
-export type ThemeMode = 'light' | 'dark';
+export type ThemeMode = "light" | "dark";
+
+export interface currentPathType {
+  currentPath: string;
+  params?: Record<string, string | undefined>;
+}

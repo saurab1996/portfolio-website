@@ -1,0 +1,8 @@
+---
+// PageSchema.astro
+import { pageSchema, defaultSchema } from "$lib/types/schema.types";
+const currentPath = Astro.url.pathname;
+const schema = pageSchema[currentPath] ?? defaultSchema;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

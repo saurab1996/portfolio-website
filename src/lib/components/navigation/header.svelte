@@ -1,28 +1,28 @@
 <script lang="ts">
-  import { page } from '$app/state';
-  import { Button } from '$lib/components/ui';
+  import { Button } from "$lib/components/ui";
+  import type { currentPathType } from "$lib/types/general.types";
 
   const navLinks = [
-    { href: '/about', label: 'ABOUT' },
-    { href: '/technical', label: 'STACK' },
-    { href: '/projects', label: 'PROJECTS' },
-    { href: '/blog', label: 'BLOG' },
-    { href: '/contact', label: 'CONTACT' },
+    { href: "/about", label: "ABOUT" },
+    { href: "/technical", label: "STACK" },
+    { href: "/projects", label: "PROJECTS" },
+    { href: "/blog", label: "BLOG" },
+    { href: "/contact", label: "CONTACT" },
   ];
-  type Props = {
+  interface Props extends currentPathType {
     class?: string;
-  };
-  let props: Props = $props();
+  }
+  const { currentPath, class: className }: Props = $props();
 </script>
 
-<nav class={`${props?.class || ''}`} aria-label="Main navigation">
+<nav class={className || ""} aria-label="Main navigation">
   {#each navLinks as link}
     <Button
       variant="nav"
       href={link.href}
-      aria-current={page.url.pathname === link.href ? 'page' : undefined}
+      aria-current={currentPath === link.href ? "page" : undefined}
       class="font-medium text-sm tracking-wide transition-colors duration-200
-          {page.url.pathname === link.href
+          {currentPath === link.href
         ? 'text-primary'
         : 'text-on-surface-variant hover:text-primary'}"
     >

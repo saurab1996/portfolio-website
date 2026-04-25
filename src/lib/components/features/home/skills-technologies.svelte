@@ -1,59 +1,57 @@
 <script>
-  import {
-    Server,
-    Cloud,
-    Database,
-    Code,
-    GitBranch,
-    Boxes,
-    Workflow,
-    HardDrive,
-    Zap,
-    Globe,
-    Wrench,
-  } from '@lucide/svelte/icons';
-  import { GlassCard } from '$lib/components/ui';
+  import Server from "@lucide/svelte/icons/server";
+  import Cloud from "@lucide/svelte/icons/cloud";
+  import Database from "@lucide/svelte/icons/database";
+  import Code from "@lucide/svelte/icons/code";
+  import GitBranch from "@lucide/svelte/icons/git-branch";
+  import Boxes from "@lucide/svelte/icons/boxes";
+  import Workflow from "@lucide/svelte/icons/workflow";
+  import HardDrive from "@lucide/svelte/icons/hard-drive";
+  import Zap from "@lucide/svelte/icons/zap";
+  import Globe from "@lucide/svelte/icons/globe";
+  import Wrench from "@lucide/svelte/icons/wrench";
+  import { GlassCard } from "$lib/components/ui";
 
   const skillGroups = [
     {
-      category: 'Backend',
+      category: "Backend",
       skills: [
-        { name: 'PHP / Laravel', icon: Code },
-        { name: 'WordPress (Core/Custom)', icon: Server },
-        { name: 'Node.js / Express', icon: Code },
-        { name: 'Redis', icon: Zap },
-        { name: 'Memcached', icon: HardDrive },
+        { name: "PHP / Laravel", icon: Code },
+        { name: "WordPress (Core/Custom)", icon: Server },
+        { name: "Node.js / Express", icon: Code },
+        { name: "Redis", icon: Zap },
+        { name: "Memcached", icon: HardDrive },
       ],
     },
     {
-      category: 'Frontend',
+      category: "Frontend",
       skills: [
-        { name: 'MySQL / PostgreSQL', icon: Database },
-        { name: 'React / Next.js', icon: Code },
-        { name: 'TypeScript', icon: Code },
-        { name: 'Tailwind CSS', icon: Code },
-        { name: 'Vue.js', icon: Code },
+        { name: "MySQL / PostgreSQL", icon: Database },
+        { name: "React / Next.js", icon: Code },
+        { name: "TypeScript", icon: Code },
+        { name: "Tailwind CSS", icon: Code },
+        { name: "Vue.js", icon: Code },
       ],
     },
     {
-      category: 'DevOps',
+      category: "DevOps",
       skills: [
-        { name: 'AWS', icon: Cloud },
-        { name: 'Cloudflare (CDN, R2, Workers)', icon: Globe },
+        { name: "AWS", icon: Cloud },
+        { name: "Cloudflare (CDN, R2, Workers)", icon: Globe },
 
-        { name: 'Docker', icon: Boxes },
-        { name: 'Kubernetes', icon: Boxes },
+        { name: "Docker", icon: Boxes },
+        { name: "Kubernetes", icon: Boxes },
 
-        { name: 'CI/CD Pipelines', icon: Workflow },
-        { name: 'Jenkins', icon: Wrench },
+        { name: "CI/CD Pipelines", icon: Workflow },
+        { name: "Jenkins", icon: Wrench },
       ],
     },
     {
-      category: 'Version Control',
+      category: "Version Control",
       skills: [
-        { name: 'Git / GitHub', icon: GitBranch },
-        { name: 'Bitbucket', icon: GitBranch },
-        { name: 'GitLab', icon: GitBranch },
+        { name: "Git / GitHub", icon: GitBranch },
+        { name: "Bitbucket", icon: GitBranch },
+        { name: "GitLab", icon: GitBranch },
       ],
     },
   ];

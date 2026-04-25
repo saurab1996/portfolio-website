@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { Button } from '$lib/components/ui';
+  import { Button } from "$lib/components/ui";
 
   const navLinks = [
-    { href: '/about', label: 'ABOUT' },
-    { href: '/technical', label: 'STACK' },
-    { href: '/projects', label: 'PROJECTS' },
-    { href: '/blog', label: 'BLOG' },
-    { href: '/contact', label: 'CONTACT' },
+    { href: "/about", label: "ABOUT" },
+    { href: "/technical", label: "STACK" },
+    { href: "/projects", label: "PROJECTS" },
+    { href: "/blog", label: "BLOG" },
+    { href: "/contact", label: "CONTACT" },
   ];
 </script>
 

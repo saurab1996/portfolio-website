@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { MenuIcon, XIcon } from 'lucide-svelte';
+  import MenuIcon from "@lucide/svelte/icons/menu";
+  import XIcon from "@lucide/svelte/icons/x";
   import {
     Sheet,
     SheetTrigger,
@@ -7,10 +8,12 @@
     SheetContent,
     SheetTitle,
     SheetClose,
-  } from '$lib/components/overlays';
-  import { HeaderNavigation } from '$lib/components/navigation';
-  import { ResumeButton } from '$lib/components/buttons';
-  import { Logo } from '$lib/components/ui';
+  } from "$lib/components/overlays";
+  import { HeaderNavigation } from "$lib/components/navigation";
+  import { ResumeButton } from "$lib/components/buttons";
+  import { Logo } from "$lib/components/ui";
+  import type { currentPathType } from "$lib/types/general.types";
+  const { currentPath }: currentPathType = $props();
 </script>
 
 <Sheet>
@@ -27,7 +30,7 @@
       </SheetClose>
     </SheetHeader>
     <div class="flex flex-col gap-6 px-4 pt-6">
-      <HeaderNavigation class="flex flex-col items-start gap-4" />
+      <HeaderNavigation {currentPath} class="flex flex-col items-start gap-4" />
       <ResumeButton size="lg" />
     </div>
   </SheetContent>

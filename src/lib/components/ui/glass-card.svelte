@@ -20,9 +20,8 @@
   this={as}
   class={cn(
     'relative rounded-xl',
-    'border border-white/20 dark:border-white/10',
-    'bg-white/60 dark:bg-white/5',
-    'backdrop-blur-md',
+    'border border-border/50',
+    'bg-card/70 backdrop-blur-md',
     'shadow-glass',
     hover && 'hover:-translate-y-0.5 transition-transform',
     className,

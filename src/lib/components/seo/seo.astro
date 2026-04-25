@@ -1,0 +1,45 @@
+---
+// SEO.astro
+import { SITE_URL, CDN_URL } from "$lib/config";
+import { FAVICON_URL } from "$lib/data/cdn-assets";
+import { pageMeta, defaultMeta } from "$lib/data/seo";
+import type { SEOMeta } from "$lib/types/seo.types";
+const currentPath = Astro.url.pathname;
+interface Props {
+  override?: Partial<SEOMeta>;
+}
+
+const { override }: Props = Astro.props;
+const base = pageMeta[currentPath] ?? defaultMeta;
+const meta: SEOMeta = { ...base, ...override };
+---
+
+<title>{meta.title}</title>
+<meta name="description" content={meta.description} />
+
+{meta.keywords && <meta name="keywords" content={meta.keywords} />}
+
+<link rel="canonical" href={meta.canonical ?? `${SITE_URL}${currentPath}`} />
+
+<meta property="og:title" content={meta.title} />
+<meta property="og:description" content={meta.description} />
+<meta property="og:url" content={`${SITE_URL}${currentPath}`} />
+<meta property="og:type" content="website" />
+{
+  meta.ogImage && (
+    <meta property="og:image" content={`${CDN_URL}${meta.ogImage}`} />
+  )
+}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={meta.title} />
+<meta name="twitter:description" content={meta.description} />
+{
+  meta.ogImage && (
+    <meta name="twitter:image" content={`${CDN_URL}${meta.ogImage}`} />
+  )
+}
+
+<link rel="icon" href={`${CDN_URL}${FAVICON_URL}`} />
+<link rel="apple-touch-icon" href={`${CDN_URL}${FAVICON_URL}`} />
+<meta name="msapplication-TileImage" content={`${CDN_URL}${FAVICON_URL}`} />

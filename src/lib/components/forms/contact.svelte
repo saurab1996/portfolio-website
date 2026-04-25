@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button, Input, Textarea, Label } from '$lib/components/ui';
-  import { useContactForm } from '$lib/hooks/use-contact-form.svelte';
-  import { CircleCheck } from 'lucide-svelte';
+  import { Button, Input, Textarea, Label } from "$lib/components/ui";
+  import { useContactForm } from "$lib/hooks/use-contact-form.svelte";
+  import CircleCheck from "@lucide/svelte/icons/circle-check";
 
   const { values, touched, errors, state, handleSubmit, touch } =
     useContactForm();
@@ -27,7 +27,7 @@
         id="name"
         placeholder="Saurab Gupta"
         bind:value={values.name}
-        onblur={() => touch('name')}
+        onblur={() => touch("name")}
         aria-invalid={touched.name && !!errors.name}
       />
       {#if touched.name && errors.name}
@@ -43,7 +43,7 @@
         type="email"
         placeholder="hello@example.com"
         bind:value={values.email}
-        onblur={() => touch('email')}
+        onblur={() => touch("email")}
         aria-invalid={touched.email && !!errors.email}
       />
       {#if touched.email && errors.email}
@@ -59,7 +59,7 @@
         rows={4}
         placeholder="Tell me about your project..."
         bind:value={values.message}
-        onblur={() => touch('message')}
+        onblur={() => touch("message")}
         aria-invalid={touched.message && !!errors.message}
       />
       {#if touched.message && errors.message}
@@ -74,7 +74,7 @@
         disabled={!state.canSubmit || state.loading}
         size="lg"
       >
-        {state.loading ? 'Sending...' : 'Send Message'}
+        {state.loading ? "Sending..." : "Send Message"}
       </Button>
       {#if state.error}
         <div

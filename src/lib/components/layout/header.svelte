@@ -1,23 +1,33 @@
 <script lang="ts">
-  import { Logo } from '$lib/components/ui';
-  import { HeaderNavigation } from '$lib/components/navigation';
-  import { ResumeButton, ThemeToggleButton } from '$lib/components/buttons';
-  import { MobileMenu } from '$lib/components/layout';
+  import { Logo } from "$lib/components/ui";
+  import { HeaderNavigation } from "$lib/components/navigation";
+  import { ResumeButton, ThemeToggleButton } from "$lib/components/buttons";
+  import { MobileMenu } from "$lib/components/layout";
+  import type { currentPathType } from "$lib/types/general.types";
 
   let isSticky = $state(false);
   $effect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
+
+    let ticking = false;
 
     const onScroll = () => {
-      isSticky = window.scrollY > 10;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        isSticky = window.scrollY > 10;
+        ticking = false;
+      });
     };
 
     onScroll();
 
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   });
+
+  const { currentPath }: currentPathType = $props();
 </script>
 
 <header
@@ -25,8 +35,8 @@
     ? 'backdrop-blur-xl shadow-lg'
     : 'shadow-none'}"
   style={isSticky
-    ? 'background: color-mix(in srgb, var(--background) 80%, transparent)'
-    : 'background: transparent'}
+    ? "background: color-mix(in srgb, var(--background) 80%, transparent)"
+    : "background: transparent"}
 >
   <div
     class="content-width flex justify-between items-center px-4 lg:px-0 py-5 w-full"
@@ -37,11 +47,11 @@
     </a>
 
     <!-- Navigation -->
-    <HeaderNavigation class="hidden lg:flex items-center gap-8" />
+    <HeaderNavigation {currentPath} class="hidden lg:flex items-center gap-8" />
     <div class="flex gap-3 items-center">
       <ThemeToggleButton />
       <ResumeButton size="lg" />
-      <MobileMenu />
+      <MobileMenu {currentPath} />
     </div>
   </div>
 

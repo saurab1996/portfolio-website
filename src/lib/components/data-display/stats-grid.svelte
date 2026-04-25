@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { ParsedStat } from '$lib/types/general.types';
-  import { countUp } from '$lib/utils/countUp';
-  import { useInView } from '$lib/utils/useInView.svelte';
-  import { GlassCard } from '$lib/components/ui';
+  import type { ParsedStat } from "$lib/types/general.types";
+  import { countUp } from "$lib/utils/countUp";
+  import { useInView } from "$lib/utils/useInView.svelte";
+  import { GlassCard } from "$lib/components/ui";
 
   type StatEntry = {
     value: string;
@@ -12,29 +12,29 @@
 
   const stats = [
     {
-      value: '5+',
-      label: 'Years Full-Stack in Production',
+      value: "5+",
+      label: "Years Full-Stack in Production",
     },
     {
-      value: '150K+',
-      label: 'SEO Pages Engineered at Scale',
+      value: "150K+",
+      label: "SEO Pages Engineered at Scale",
     },
     {
-      value: '10+',
-      label: 'Client Products Led & Delivered',
+      value: "10+",
+      label: "Client Products Led & Delivered",
     },
     {
-      value: '<2s',
-      label: 'From Server to Screen',
+      value: "<2s",
+      label: "From Server to Screen",
     },
   ];
 
   const parseStatValue = (value: string): ParsedStat => {
     const match = value.match(/^([<>~]?)(\d+(?:\.\d+)?)(.*)/);
     return {
-      prefix: match?.[1] ?? '',
+      prefix: match?.[1] ?? "",
       numeric: match ? parseFloat(match[2]) : null,
-      suffix: match?.[3] ?? '',
+      suffix: match?.[3] ?? "",
     };
   };
 

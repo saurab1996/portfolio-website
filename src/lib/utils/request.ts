@@ -1,4 +1,4 @@
-import { PUBLIC_API_URL } from '$env/static/public';
+import { API_URL } from "$lib/config";
 
 type RequestOptions = {
   headers?: Record<string, string>;
@@ -10,7 +10,7 @@ export class ApiError extends Error {
     message: string,
   ) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
   }
 }
 
@@ -25,8 +25,8 @@ async function handleResponse<T>(res: Response): Promise<T> {
 function handleError(err: unknown): never {
   if (err instanceof ApiError) throw err;
   if (err instanceof TypeError)
-    throw new ApiError(0, 'Network error — check your connection');
-  throw new ApiError(0, 'An unexpected error occurred');
+    throw new ApiError(0, "Network error — check your connection");
+  throw new ApiError(0, "An unexpected error occurred");
 }
 
 async function fetchRequest<T>(
@@ -34,9 +34,9 @@ async function fetchRequest<T>(
   init: RequestInit,
 ): Promise<T> {
   try {
-    const res = await fetch(`${PUBLIC_API_URL}${endpoint}`, {
+    const res = await fetch(`${API_URL}${endpoint}`, {
       ...init,
-      headers: { 'Content-Type': 'application/json', ...init.headers },
+      headers: { "Content-Type": "application/json", ...init.headers },
     });
     return await handleResponse<T>(res);
   } catch (err) {
@@ -46,29 +46,29 @@ async function fetchRequest<T>(
 
 export const request = {
   get: <T>(endpoint: string, options: RequestOptions = {}) =>
-    fetchRequest<T>(endpoint, { method: 'GET', headers: options.headers }),
+    fetchRequest<T>(endpoint, { method: "GET", headers: options.headers }),
 
   post: <T>(endpoint: string, body: unknown, options: RequestOptions = {}) =>
     fetchRequest<T>(endpoint, {
-      method: 'POST',
+      method: "POST",
       headers: options.headers,
       body: JSON.stringify(body),
     }),
 
   put: <T>(endpoint: string, body: unknown, options: RequestOptions = {}) =>
     fetchRequest<T>(endpoint, {
-      method: 'PUT',
+      method: "PUT",
       headers: options.headers,
       body: JSON.stringify(body),
     }),
 
   patch: <T>(endpoint: string, body: unknown, options: RequestOptions = {}) =>
     fetchRequest<T>(endpoint, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: options.headers,
       body: JSON.stringify(body),
     }),
 
   delete: <T>(endpoint: string, options: RequestOptions = {}) =>
-    fetchRequest<T>(endpoint, { method: 'DELETE', headers: options.headers }),
+    fetchRequest<T>(endpoint, { method: "DELETE", headers: options.headers }),
 };

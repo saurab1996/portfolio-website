@@ -1,19 +1,21 @@
 <script lang="ts">
-  import { EMAIL_ADDRESS, LINKEDIN_ADDRESS } from '$lib/config';
-  import { Globe, User, Mail } from 'lucide-svelte';
+  import { EMAIL_ADDRESS, GITHUB_ADDRESS, LINKEDIN_ADDRESS } from "$lib/config";
+  import Globe from "@lucide/svelte/icons/globe";
+  import User from "@lucide/svelte/icons/user";
+  import Mail from "@lucide/svelte/icons/mail";
   const links = [
     {
-      label: 'GitHub',
-      href: 'https://github.com/saurabgupta',
+      label: "GitHub",
+      href: GITHUB_ADDRESS,
       icon: Globe,
     },
     {
-      label: 'LinkedIn',
+      label: "LinkedIn",
       href: LINKEDIN_ADDRESS,
       icon: User,
     },
     {
-      label: 'Contact',
+      label: "Contact",
       href: `mailto:${EMAIL_ADDRESS}`,
       icon: Mail,
     },

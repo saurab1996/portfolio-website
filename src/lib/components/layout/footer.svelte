@@ -1,10 +1,10 @@
 <script lang="ts">
   const year = new Date().getFullYear();
-  import { Logo } from '$lib/components/ui';
+  import { Logo } from "$lib/components/ui";
   import {
     FooterNavigation,
     SocialMediaNavigation,
-  } from '$lib/components/navigation';
+  } from "$lib/components/navigation";
 </script>
 
 <footer class="full-width px-4 lg:px-0 py-5 bg-surface-container-low mt-auto">
