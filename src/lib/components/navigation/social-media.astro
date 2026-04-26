@@ -1,0 +1,36 @@
+---
+import { EMAIL_ADDRESS, GITHUB_ADDRESS, LINKEDIN_ADDRESS } from '$lib/config';
+import Globe from '@lucide/astro/icons/globe';
+import User from '@lucide/astro/icons/user';
+import Mail from '@lucide/astro/icons/mail';
+
+const links = [
+  {
+    label: 'GitHub',
+    href: GITHUB_ADDRESS,
+    icon: Globe,
+  },
+  {
+    label: 'LinkedIn',
+    href: LINKEDIN_ADDRESS,
+    icon: User,
+  },
+  {
+    label: 'Contact',
+    href: `mailto:${EMAIL_ADDRESS}`,
+    icon: Mail,
+  },
+];
+---
+
+{
+  links.map((link) => (
+    <a
+      href={link.href}
+      class="flex items-center gap-2 text-on-surface-variant hover:text-primary text-sm tracking-tight transition-colors"
+    >
+      <link.icon class="size-4" />
+      <span>{link.label}</span>
+    </a>
+  ))
+}

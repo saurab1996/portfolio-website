@@ -1,6 +1,6 @@
 <script lang="ts">
-  import MenuIcon from "@lucide/svelte/icons/menu";
-  import XIcon from "@lucide/svelte/icons/x";
+  import MenuIcon from '@lucide/svelte/icons/menu';
+  import XIcon from '@lucide/svelte/icons/x';
   import {
     Sheet,
     SheetTrigger,
@@ -8,25 +8,27 @@
     SheetContent,
     SheetTitle,
     SheetClose,
-  } from "$lib/components/overlays";
-  import { HeaderNavigation } from "$lib/components/navigation";
-  import { ResumeButton } from "$lib/components/buttons";
-  import { Logo } from "$lib/components/ui";
-  import type { currentPathType } from "$lib/types/general.types";
+  } from '$lib/components/overlays';
+  import { HeaderNavigation } from '$lib/components/navigation';
+  import { ResumeButton } from '$lib/components/buttons';
+  import { Logo } from '$lib/components/ui';
+  import type { currentPathType } from '$lib/types/general.types';
   const { currentPath }: currentPathType = $props();
 </script>
 
 <Sheet>
   <SheetTrigger class="lg:hidden">
-    <MenuIcon size={28} />
+    <MenuIcon size={28} class="cursor-pointer" />
   </SheetTrigger>
   <SheetContent side="right" class="[&>button]:hidden">
     <SheetHeader class="flex flex-row items-center justify-between">
       <SheetTitle>
-        <Logo />
+        <a href="/" aria-label="Go to homepage">
+          <Logo />
+        </a>
       </SheetTitle>
       <SheetClose>
-        <XIcon size={28} />
+        <XIcon size={28} class="cursor-pointer" />
       </SheetClose>
     </SheetHeader>
     <div class="flex flex-col gap-6 px-4 pt-6">

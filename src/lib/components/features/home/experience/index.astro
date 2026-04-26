@@ -1,0 +1,22 @@
+---
+import Timeline from '$lib/components/features/home/experience/timline.svelte';
+---
+
+<section id="experience">
+  <!-- Header -->
+  <div
+    class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 lg:mb-16"
+  >
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+      Experience
+    </h2>
+
+    <div
+      class="hidden md:block flex-1 h-px mx-8 bg-linear-to-r from-transparent via-gray-300 to-transparent opacity-60"
+    >
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <Timeline client:visible />
+</section>

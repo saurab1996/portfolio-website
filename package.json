@@ -20,6 +20,7 @@
     "svelte": "^5.55.5"
   },
   "devDependencies": {
+    "@lucide/astro": "^1.11.0",
     "@lucide/svelte": "^1.11.0",
     "@tailwindcss/vite": "^4.2.4",
     "@types/node": "^25.5.2",

@@ -1,0 +1,99 @@
+---
+import Server from '@lucide/astro/icons/server';
+import Cloud from '@lucide/astro/icons/cloud';
+import Database from '@lucide/astro/icons/database';
+import Code from '@lucide/astro/icons/code';
+import GitBranch from '@lucide/astro/icons/git-branch';
+import Boxes from '@lucide/astro/icons/boxes';
+import Workflow from '@lucide/astro/icons/workflow';
+import HardDrive from '@lucide/astro/icons/hard-drive';
+import Zap from '@lucide/astro/icons/zap';
+import Globe from '@lucide/astro/icons/globe';
+import Wrench from '@lucide/astro/icons/wrench';
+
+import { GlassCard } from '$lib/components/ui';
+
+const skillGroups = [
+  {
+    category: 'Backend',
+    skills: [
+      { name: 'PHP / Laravel', icon: Code },
+      { name: 'WordPress (Core/Custom)', icon: Server },
+      { name: 'Node.js / Express', icon: Code },
+      { name: 'Redis', icon: Zap },
+      { name: 'Memcached', icon: HardDrive },
+    ],
+  },
+  {
+    category: 'Frontend',
+    skills: [
+      { name: 'MySQL / PostgreSQL', icon: Database },
+      { name: 'React / Next.js', icon: Code },
+      { name: 'TypeScript', icon: Code },
+      { name: 'Tailwind CSS', icon: Code },
+      { name: 'Vue.js', icon: Code },
+    ],
+  },
+  {
+    category: 'DevOps',
+    skills: [
+      { name: 'AWS', icon: Cloud },
+      { name: 'Cloudflare (CDN, R2, Workers)', icon: Globe },
+      { name: 'Docker', icon: Boxes },
+      { name: 'Kubernetes', icon: Boxes },
+      { name: 'CI/CD Pipelines', icon: Workflow },
+      { name: 'Jenkins', icon: Wrench },
+    ],
+  },
+  {
+    category: 'Version Control',
+    skills: [
+      { name: 'Git / GitHub', icon: GitBranch },
+      { name: 'Bitbucket', icon: GitBranch },
+      { name: 'GitLab', icon: GitBranch },
+    ],
+  },
+];
+---
+
+<section id="skills">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 lg:mb-16">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+      Skills & Technologies
+    </h2>
+
+    <div class="hidden md:block flex-1 h-px mx-8 bg-linear-to-r from-transparent via-gray-300 to-transparent opacity-60"></div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+    {skillGroups.map((group) => (
+      <GlassCard class="p-5 md:p-6 flex flex-col gap-3" as="div">
+        
+        <!-- Category -->
+        <div class="text-xs font-bold text-primary tracking-[0.18em] uppercase mb-3">
+          {group.category}
+        </div>
+
+        <!-- Skills -->
+        <ul class="space-y-2 text-sm text-on-surface font-medium">
+          {group.skills.map((skill) => {
+            const Icon = skill.icon;
+
+            return (
+              <li class="flex items-center gap-2">
+                {Icon ? (
+                  <Icon class="w-4 h-4 text-primary shrink-0" />
+                ) : (
+                  <span class="w-1 h-1 bg-primary rounded-full" />
+                )}
+                <span>{skill.name}</span>
+              </li>
+            );
+          })}
+        </ul>
+
+      </GlassCard>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+import { Logo } from '$lib/components/ui';
+import { HeaderNavigation } from '$lib/components/navigation';
+import { ThemeToggleButton, ResumeButton } from '$lib/components/buttons';
+import { MobileMenu } from '$lib/components/layout';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 w-full z-50 transition-all duration-300"
+>
+  <div
+    class="content-width flex justify-between items-center px-4 lg:px-0 py-5 w-full"
+  >
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3" aria-label="Go to homepage">
+      <Logo />
+    </a>
+
+    <!-- Navigation -->
+    <HeaderNavigation {currentPath} class="hidden lg:flex items-center gap-8" />
+
+    <div class="flex gap-3 items-center">
+      <ThemeToggleButton client:load />
+      <ResumeButton size="lg" />
+      <MobileMenu client:media="(max-width: 1024px)" {currentPath} />
+    </div>
+  </div>
+
+  <div class="bg-surface-container-low h-px w-full"></div>
+</header>
+
+<!-- tiny JS for scroll -->
+<script is:inline>
+  const header = document.getElementById('site-header');
+
+  let ticking = false;
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      const isSticky = window.scrollY > 10;
+
+      header.classList.toggle('backdrop-blur-xl', isSticky);
+      header.classList.toggle('shadow-lg', isSticky);
+      header.classList.toggle('shadow-none', !isSticky);
+
+      header.style.background = isSticky
+        ? 'color-mix(in srgb, var(--background) 80%, transparent)'
+        : 'transparent';
+
+      ticking = false;
+    });
+  };
+
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

@@ -31,7 +31,7 @@
   {#if showIcon}
     <ExternalIcon
       size={iconSize}
-      class="opacity-50 group-hover:opacity-100 transition"
+      class="opacity-80 group-hover:opacity-100 transition"
     />
   {/if}
 </a>
