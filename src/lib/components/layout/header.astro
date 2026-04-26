@@ -23,9 +23,9 @@ const currentPath = Astro.url.pathname;
     <HeaderNavigation {currentPath} class="hidden lg:flex items-center gap-8" />
 
     <div class="flex gap-3 items-center">
-      <ThemeToggleButton client:load />
+      <ThemeToggleButton />
       <ResumeButton size="lg" />
-      <MobileMenu client:media="(max-width: 1024px)" {currentPath} />
+      <MobileMenu />
     </div>
   </div>
 

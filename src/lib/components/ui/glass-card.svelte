@@ -19,9 +19,10 @@
 <svelte:element
   this={as}
   class={cn(
+    'text-foreground',
     'relative rounded-xl',
     'border border-border/50',
-    'bg-card/70 backdrop-blur-md',
+    'bg-card/90 backdrop-blur-md',
     'shadow-glass',
     hover && 'hover:-translate-y-0.5 transition-transform',
     className,

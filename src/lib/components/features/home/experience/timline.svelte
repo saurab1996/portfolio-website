@@ -171,7 +171,7 @@
           <!-- Client inline (cleaner) -->
           {#if item.client}
             <div class="flex items-center gap-2 text-xs">
-              <span class="text-gray-400 font-bold">Client</span>
+              <span class="text-muted-foreground/90 font-bold">Client</span>
 
               <ExternalLink
                 href={item.client.url}
@@ -187,7 +187,7 @@
         <div class="text-right shrink-0">
           <span
             class={`text-xs font-semibold ${
-              item.isActive ? 'text-primary' : 'text-gray-500'
+              item.isActive ? 'text-card-foreground' : 'text-muted-foreground'
             }`}
           >
             {item.date}
@@ -195,11 +195,11 @@
         </div>
       </div>
 
-      <div class="text-sm font-semibold text-primary uppercase">
+      <div class="text-sm font-semibold text-card-foreground uppercase">
         {item.title}
       </div>
 
-      <div class="text-xs text-gray-500 mb-4">{item.location}</div>
+      <div class="text-xs text-muted-foreground mb-4">{item.location}</div>
 
       <ul class="space-y-3">
         {#each item.achievements as a}
@@ -209,7 +209,7 @@
             {#if Icon}
               <Icon
                 size={16}
-                class={item.isActive ? 'text-primary' : 'text-gray-400'}
+                class={item.isActive ? 'text-card-foreground' : 'text-gray-400'}
               />
             {/if}
             {a.text}

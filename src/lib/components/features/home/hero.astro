@@ -1,5 +1,12 @@
 ---
-import { StatsGrid } from '$lib/components/data-display';
+import { GlassCard } from '$lib/components/ui';
+
+const stats = [
+  { value: '5+', label: 'Years Full-Stack in Production' },
+  { value: '150K+', label: 'SEO Pages Engineered at Scale' },
+  { value: '10+', label: 'Client Products Led & Delivered' },
+  { value: '<2s', label: 'From Server to Screen' },
+];
 ---
 
 <section class="flex flex-col gap-5 md:gap-6 lg:gap-7">
@@ -43,6 +50,66 @@ import { StatsGrid } from '$lib/components/data-display';
 
   <!-- Stats -->
   <div class="pt-4 md:pt-6">
-    <StatsGrid client:idle />
+    <section id="stats-section" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {
+        stats.map((stat) => (
+          <GlassCard class="p-6 flex flex-col gap-2">
+            <span
+              class="text-3xl font-bold tracking-tight tabular-nums"
+              data-value={stat.value}
+            >
+              {stat.value}
+            </span>
+            <span class="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
+              {stat.label}
+            </span>
+          </GlassCard>
+        ))
+      }
+    </section>
   </div>
 </section>
+
+<script>
+  import { useInView } from '$lib/utils/useInView';
+  import { countUp } from '$lib/utils/countUp';
+  import type { ParsedStat } from '$lib/types/general.types';
+
+  function parseStatValue(value: string): ParsedStat {
+    const match = value.match(/^([<>~]?)(\d+(?:\.\d+)?)(.*)/);
+    return {
+      prefix: match?.[1] ?? '',
+      numeric: match ? parseFloat(match[2]) : null,
+      suffix: match?.[3] ?? '',
+    };
+  }
+
+  const section = document.getElementById('stats-section') as HTMLElement;
+  const spans = section.querySelectorAll<HTMLElement>('[data-value]');
+
+  useInView(section, () => {
+    const cleanups: (() => void)[] = [];
+
+    spans.forEach((span) => {
+      const value = span.dataset.value ?? '';
+      const { prefix, numeric, suffix } = parseStatValue(value);
+      if (numeric === null) return;
+
+      span.textContent = `${prefix}0${suffix}`;
+
+      const stop = countUp({
+        to: numeric,
+        onUpdate: (val: number) => {
+          span.textContent = `${prefix}${val}${suffix}`;
+        },
+        onComplete: () => {
+          span.textContent = value;
+        },
+      });
+
+      cleanups.push(stop);
+    });
+
+    return () => cleanups.forEach((fn) => fn());
+  });
+</script>

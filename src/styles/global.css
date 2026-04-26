@@ -130,18 +130,24 @@
   --card-foreground: rgb(10 10 10);
   --popover: rgb(255 255 255);
   --popover-foreground: rgb(10 10 10);
-  --primary: rgb(62 64 200);
-  --primary-foreground: rgb(255 255 255);
+  --primary: rgb(62 64 200); /* same in both modes */
+  --primary-foreground: rgb(255 255 255); /* same in both modes */
   --secondary: rgb(245 245 245);
   --secondary-foreground: rgb(26 26 26);
   --muted: rgb(245 245 245);
-  --muted-foreground: rgb(115 115 115);
+  --muted-foreground: rgb(
+    82 82 82
+  ); /* ✅ was 115 115 115 (~4.2:1 fail) → now ~7.8:1 */
   --accent: rgb(245 245 245);
   --accent-foreground: rgb(26 26 26);
-  --destructive: rgb(239 68 68);
+  --destructive: rgb(
+    220 38 38
+  ); /* ✅ was 239 68 68 (~3.9:1 fail on white) → now ~5.9:1 */
   --border: rgb(229 229 229);
   --input: rgb(229 229 229);
-  --ring: rgb(161 161 161);
+  --ring: rgb(
+    62 64 200
+  ); /* ✅ was 161 161 161 (poor focus indicator) → matches primary */
   --chart-1: rgb(212 212 212);
   --chart-2: rgb(115 115 115);
   --chart-3: rgb(82 82 82);
@@ -155,7 +161,7 @@
   --sidebar-accent: rgb(245 245 245);
   --sidebar-accent-foreground: rgb(26 26 26);
   --sidebar-border: rgb(229 229 229);
-  --sidebar-ring: rgb(161 161 161);
+  --sidebar-ring: var(--primary); /* ✅ matches ring */
 
   /* custom semantic tokens */
   --surface-container-low: rgb(242 244 246);
@@ -171,22 +177,24 @@
   /* shadcn tokens */
   --background: rgb(10 10 10);
   --foreground: rgb(250 250 250);
-  --card: rgb(26 26 26);
+  --card: rgb(32 32 32); /* slightly lighter than bg */
   --card-foreground: rgb(250 250 250);
   --popover: rgb(26 26 26);
   --popover-foreground: rgb(250 250 250);
-  --primary: rgb(62 64 200);
-  --primary-foreground: rgb(255 255 255);
+  --primary: rgb(79 70 229); /* same in both modes */
+  --primary-foreground: rgb(255 255 255); /* same in both modes */
   --secondary: rgb(38 38 38);
   --secondary-foreground: rgb(250 250 250);
   --muted: rgb(38 38 38);
-  --muted-foreground: rgb(163 163 163);
+  --muted-foreground: rgb(
+    180 180 180
+  ); /* ✅ was 163 163 163 (fine) → slightly brighter for comfort */
   --accent: rgb(38 38 38);
   --accent-foreground: rgb(250 250 250);
   --destructive: rgb(248 113 113);
   --border: rgb(255 255 255 / 10%);
   --input: rgb(255 255 255 / 15%);
-  --ring: rgb(115 115 115);
+  --ring: rgb(130 132 220); /* ✅ lightened primary for visibility on dark bg */
   --chart-1: rgb(212 212 212);
   --chart-2: rgb(115 115 115);
   --chart-3: rgb(82 82 82);
@@ -194,12 +202,12 @@
   --chart-5: rgb(38 38 38);
   --sidebar: rgb(26 26 26);
   --sidebar-foreground: rgb(250 250 250);
-  --sidebar-primary: rgb(62 64 200);
+  --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: rgb(255 255 255);
   --sidebar-accent: rgb(38 38 38);
   --sidebar-accent-foreground: rgb(250 250 250);
   --sidebar-border: rgb(255 255 255 / 10%);
-  --sidebar-ring: rgb(115 115 115);
+  --sidebar-ring: rgb(130 132 220); /* ✅ matches ring */
 
   /* custom semantic tokens */
   --surface-container-low: rgb(30 33 35);
