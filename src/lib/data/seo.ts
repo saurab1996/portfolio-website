@@ -1,45 +1,50 @@
 import { SITE_DESC, SITE_NAME } from '$lib/config';
 import type { SEOMeta } from '$lib/types/seo.types';
 
+export const DEFAULT_OG_IMAGE = '/images/favicon.svg';
 export const defaultMeta: SEOMeta = {
   title: SITE_NAME,
   description: SITE_DESC,
-  ogImage: '/og-default.png',
 };
 
 export const pageMeta: Record<string, SEOMeta> = {
   '/': {
-    title: 'Saurab Gupta — Full-Stack Developer & Team Lead',
+    title:
+      'Saurab Gupta — Senior Full-Stack Developer | Scalable WordPress & SaaS Systems',
     description: SITE_DESC,
     keywords:
-      'full-stack developer, react, next.js, vue, node.js, team lead, web performance, core web vitals',
-    ogImage: '/og-home.png',
+      'full-stack developer, scalable wordpress, saas architecture, react, node.js, web performance, core web vitals',
   },
+
   '/about': {
-    title: 'About — Saurab Gupta',
+    title: 'About Saurab Gupta — Full-Stack Developer & System Architect',
     description:
-      '5+ years of full-stack experience across fintech, healthcare, and media. Specializing in performant frontends, robust APIs, and CI/CD-driven delivery.',
+      '5+ years building scalable WordPress, SaaS platforms, and high-performance web applications across fintech and healthcare.',
     keywords:
-      'about saurab gupta, full-stack developer, team lead, instarem, web performance',
+      'about saurab gupta, wordpress developer, saas developer, system architecture, web performance',
   },
+
   '/projects': {
-    title: 'Projects — Saurab Gupta',
+    title: 'Projects — Scalable Systems, SaaS & WordPress Architecture',
     description:
-      'Production projects including programmatic SEO at scale, eCommerce platforms, EHR systems, and video streaming products.',
+      'Real-world projects including high-scale SEO systems, SaaS platforms, and performance-optimized WordPress architectures.',
     keywords:
-      'projects, portfolio, react, next.js, programmatic seo, instarem, kivicare, streamit',
+      'portfolio projects, scalable systems, wordpress architecture, saas projects, programmatic seo',
   },
-  '/blog': {
-    title: 'Blog — Saurab Gupta',
+
+  '/blogs': {
+    title: 'Engineering Blog — Performance, Architecture & Scale',
     description:
-      'Writing on frontend performance, Core Web Vitals, scalable architecture, and full-stack engineering.',
+      'Insights on Core Web Vitals, scalable architecture, WordPress optimization, and full-stack engineering.',
     keywords:
-      'blog, core web vitals, web performance, react, next.js, full-stack engineering',
+      'engineering blog, web performance, core web vitals, wordpress optimization, system design',
   },
+
   '/contact': {
-    title: 'Contact — Saurab Gupta',
+    title: 'Contact Saurab Gupta — Let’s Build Scalable Systems',
     description:
-      "Open to full-stack roles, team lead positions, and freelance projects. Let's build something fast and scalable.",
-    keywords: 'contact, hire full-stack developer, saurab gupta, freelance',
+      'Open to full-stack roles, backend positions, team lead positions, and freelance projects focused on performance and scalable architecture.',
+    keywords:
+      'hire full-stack developer, wordpress expert, saas developer, contact saurab gupta',
   },
 };

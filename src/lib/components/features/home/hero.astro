@@ -1,5 +1,5 @@
 ---
-import { GlassCard } from '$lib/components/ui';
+import { GlassCard, HeroHeader } from '$lib/components/ui';
 
 const stats = [
   { value: '5+', label: 'Years Full-Stack in Production' },
@@ -10,47 +10,29 @@ const stats = [
 ---
 
 <section class="flex flex-col gap-5 md:gap-6 lg:gap-7">
-  <!-- Badge -->
-  <div class="flex items-center gap-2">
-    <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
-    <span
-      class="text-[10px] md:text-xs font-medium tracking-[0.18em] uppercase text-muted-foreground"
-    >
-      Full-Stack Developer &amp; Team Lead · 5+ Years
-    </span>
-  </div>
-
-  <!-- Heading -->
-  <div class="flex flex-col gap-1">
-    <h1
-      class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight"
-    >
+  <HeroHeader badgeTitle="Full-Stack Developer & Team Lead · 5+ Years">
+    <Fragment slot="heading">
       Saurab Gupta.<br />
-      <span class="text-primary">Building Scalable Web.</span>
-    </h1>
-  </div>
-
-  <!-- Description -->
-  <p
-    class="text-base sm:text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-2xl mt-2"
-  >
-    Building <strong class="text-foreground font-medium">
-      scalable web applications
-    </strong>
-    and eCommerce platforms with deep expertise in
-    <strong class="text-foreground font-medium">
-      Laravel, PHP, Node.js &amp; core WordPress
-    </strong>
-    — and modern frontends in
-    <strong class="text-foreground font-medium">
-      React, Vue, Svelte &amp; Next.js.
-    </strong>
-    Focused on clean architecture, API design, and performance optimization at scale.
-  </p>
-
+      <span class="text-primary">Scalable Web Systems.</span>
+    </Fragment>
+    <Fragment slot="description">
+      Building <strong class="text-foreground font-medium">
+        scalable web applications
+      </strong>
+      and eCommerce platforms with deep expertise in
+      <strong class="text-foreground font-medium">
+        Laravel, PHP, Node.js &amp; core WordPress
+      </strong>
+      — and modern frontends in
+      <strong class="text-foreground font-medium">
+        React, Vue, Svelte &amp; Next.js.
+      </strong>
+      Focused on clean architecture, API design, and performance optimization at scale.
+    </Fragment>
+  </HeroHeader>
   <!-- Stats -->
   <div class="pt-4 md:pt-6">
-    <section id="stats-section" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div id="stats-section" class="grid grid-cols-2 md:grid-cols-4 gap-4">
       {
         stats.map((stat) => (
           <GlassCard class="p-6 flex flex-col gap-2">
@@ -66,7 +48,7 @@ const stats = [
           </GlassCard>
         ))
       }
-    </section>
+    </div>
   </div>
 </section>
 

@@ -171,6 +171,24 @@
   --accent-teal: rgb(0 104 122);
   --shadow-glass: 0 4px 24px rgba(99, 102, 241, 0.06);
   --scrollbar-width: 15px;
+  --shiki-background: var(--color-surface-container-low);
+
+  --shiki-foreground: var(--foreground);
+  --shiki-token-punctuation: var(--on-surface-variant);
+  --shiki-token-parameter: var(--on-surface);
+
+  /* Highlight colors - Balanced for Light Mode */
+  --shiki-token-keyword: var(--primary); /* High-contrast indigo */
+  --shiki-token-string: var(--accent-teal); /* Sharp contrast teal */
+  --shiki-token-string-expression: var(--accent-teal);
+  --shiki-token-comment: var(--muted-foreground); /* Soft, readable gray */
+  --shiki-token-constant: var(
+    --color-md-primary
+  ); /* Material Indigo fallback */
+  --shiki-token-function: var(--color-md-primary);
+  --shiki-token-link: var(--accent-teal);
+  --heading-height: 5.25rem;
+  --heading-top-height: calc(var(--heading-height) + 1.75rem);
 }
 
 .dark {
@@ -216,6 +234,35 @@
   --on-surface-variant: rgb(196 195 210);
   --accent-teal: rgb(76 215 246);
   --shadow-glass: 0 4px 24px rgba(99, 102, 241, 0.09);
+  --shiki-token-constant: var(
+    --color-md-inverse-primary
+  ); /* rgb(192 193 255) — light lavender */
+  --shiki-background: var(--surface-container-low);
+
+  /* Keywords & functions glow with the lightened indigo ring color */
+  --shiki-token-keyword: var(--ring);
+  --shiki-token-function: var(--ring);
+
+  /* Constants pop via the primary accent */
+  --shiki-token-constant: var(--primary);
+
+  /* Strings stay incredibly vibrant with the dark mode teal token */
+  --shiki-token-string: var(--accent-teal);
+  --shiki-token-string-expression: var(--accent-teal);
+
+  /* Muted elements adjust naturally */
+  --shiki-token-comment: var(--muted-foreground);
+  --shiki-token-punctuation: var(--on-surface-variant);
+  --shiki-token-parameter: var(--on-surface);
+}
+
+.shiki {
+  background-color: var(--shiki-background) !important;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ─────────────────────────────────────────────────────────────────────── */
@@ -223,11 +270,10 @@
 /* ─────────────────────────────────────────────────────────────────────── */
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 font-inter!;
   }
   html {
-    @apply font-inter;
-    overflow-x: hidden;
+    scroll-behavior: smooth;
     scrollbar-width: thin;
   }
   html::-webkit-scrollbar {
@@ -240,18 +286,6 @@
       background-color 0.3s,
       color 0.3s;
     overflow-x: hidden;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-inter);
-  }
-  /* SVG text elements */
-  text {
-    font-family: var(--font-inter);
   }
   /* global.css */
   h1 {
@@ -297,6 +331,102 @@
   margin-right: calc(-50dvw + 50% + var(--scrollbar-width, 0px) / 2);
 }
 
+@utility full-width-diagonal {
+  /* min: 40px (mobile)
+     val: 12vw (scales with screen)
+     max: 200px (desktop limit)
+  */
+  --diagonal: clamp(40px, 12vw, 200px);
+
+  /* Full Width Logic */
+  width: calc(100dvw - var(--scrollbar-width, 0px));
+  max-width: calc(100dvw - var(--scrollbar-width, 0px));
+  margin-left: calc(-50dvw + 50% + (var(--scrollbar-width, 0px) / 2));
+  margin-right: calc(-50dvw + 50% + (var(--scrollbar-width, 0px) / 2));
+
+  position: relative;
+  overflow: hidden;
+
+  /* The Clip Path */
+  clip-path: polygon(
+    0 var(--diagonal),
+    100% 0%,
+    100% calc(100% - var(--diagonal)),
+    0 100%
+  );
+
+  /* Dynamic padding to ensure content stays inside the visible area */
+  padding-block: calc(var(--diagonal) + 4rem);
+}
+
 .content-width {
-  @apply max-w-5xl mx-auto px-4 lg:px-0;
+  @apply max-w-screen-xl mx-auto px-4 lg:px-0;
+}
+
+.signature-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-md-primary) 0%,
+    var(--color-md-primary-container) 100%
+  );
+}
+
+/* global.css */
+#content {
+  h2 {
+    @apply text-2xl md:text-3xl font-bold tracking-tight leading-snug;
+    scroll-margin-top: var(--heading-top-height);
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-semibold tracking-tight leading-snug;
+    scroll-margin-top: var(--heading-top-height);
+  }
+
+  h4 {
+    @apply text-lg md:text-xl font-semibold tracking-tight;
+  }
+
+  h5 {
+    @apply text-base font-semibold;
+  }
+
+  h6 {
+    @apply text-sm font-semibold;
+  }
+  p,
+  p code {
+    @apply leading-relaxed text-base font-normal text-foreground/90;
+  }
+  p code {
+    @apply text-foreground;
+  }
+  strong {
+    @apply text-lg font-semibold text-card-foreground;
+  }
+  a {
+    /* Base styles matching the design scale */
+    @apply text-primary font-semibold underline-offset-4 decoration-primary/30 
+           transition-all duration-300 ease-in-out cursor-pointer;
+  }
+
+  /* Hover and Focus States */
+  a:hover {
+    /* Elevate contrast and brighten underline */
+    @apply text-primary/90 hover:underline;
+  }
+
+  a:focus-visible {
+    /* Consistent focus rings matching --ring */
+    @apply outline-none ring-2 ring-ring ring-offset-2 rounded-sm;
+  }
+
+  /* Override for specialized component links (e.g., cards, nav, TOC) */
+  a.no-underline {
+    @apply no-underline;
+  }
+}
+
+astro-island {
+  display: block !important;
 }

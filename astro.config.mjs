@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 import path from 'node:path'; // Built-in, no install needed
 import tailwind from '@tailwindcss/vite';
 import { loadEnv } from 'vite';
-
 import compressor from 'astro-compressor';
 
 const mode = process.env.NODE_ENV || 'development';
@@ -46,6 +45,20 @@ export default defineConfig({
     },
     build: {
       cssCodeSplit: false,
+    },
+    environments: {
+      client: {
+        build: {
+          rollupOptions: {
+            output: {
+              // path names relative to `outDir`
+              entryFileNames: 'js/[name]-[hash].js',
+              chunkFileNames: 'js/chunks/[name]-[hash].js',
+              assetFileNames: 'static/[name]-[hash][extname]',
+            },
+          },
+        },
+      },
     },
   },
 });

@@ -1,0 +1,38 @@
+---
+import { Button } from '$lib/components/ui';
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+}
+const {
+  title = 'Performance bottlenecks or scaling challenges?',
+  subtitle = `I optimize backend systems, APIs, and modern frontend
+      applications—building large-scale PHP/WordPress architectures for
+      performance, stability, and growth.`,
+  ctaText = 'Start a Project',
+}: Props = Astro.props;
+---
+
+<section
+  class="p-5 md:p-6 bg-surface-container-low rounded-lg relative overflow-hidden border border-outline-variant/20"
+>
+  <div
+    class="absolute top-0 right-0 w-64 h-64 signature-gradient opacity-10 rounded-full -mr-32 -mt-32"
+  >
+  </div>
+  <div class="relative z-10 max-w-2xl">
+    <h2 class="text-3xl font-bold tracking-tight mb-4">
+      {title}
+    </h2>
+    <p class="text-on-surface-variant mb-8 text-lg">
+      {subtitle}
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <Button href="/contact" size="xl"> {ctaText} </Button>
+      <Button href="/#stats-section" size="xl" variant="surface">
+        View Stack
+      </Button>
+    </div>
+  </div>
+</section>

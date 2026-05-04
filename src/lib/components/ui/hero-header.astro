@@ -1,0 +1,40 @@
+---
+interface Props {
+  badgeTitle?: string;
+  subHeadingAs?: keyof HTMLElementTagNameMap;
+}
+
+const { badgeTitle, subHeadingAs: Element = 'h2' } = Astro.props;
+---
+
+<div class="flex flex-col gap-4 md:gap-6 py-6">
+  {
+    badgeTitle && (
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-400" />
+        <span class="text-[10px] md:text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground">
+          {badgeTitle}
+        </span>
+      </div>
+    )
+  }
+
+  <div class="flex flex-col gap-2">
+    <h1
+      class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight"
+    >
+      <slot name="heading" />
+    </h1>
+    {
+      Astro.slots.has('subHeading') && (
+        <Element class="text-base md:text-lg text-foreground/80 font-medium max-w-2xl mt-1">
+          <slot name="subHeading" />
+        </Element>
+      )
+    }
+  </div>
+
+  <div class="text-base sm:text-lg text-muted-foreground max-w-3xl">
+    <slot name="description" />
+  </div>
+</div>

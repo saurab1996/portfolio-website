@@ -8,37 +8,33 @@ import {
 } from '$lib/components/navigation';
 ---
 
-<footer class="full-width px-4 lg:px-0 py-5 bg-surface-container-low mt-auto">
-  <div class="content-width">
-    <!-- Top -->
+<footer class="full-width py-10 bg-(--surface-container-low) mt-auto">
+  <div class="content-width px-4 lg:px-0">
+    <!-- Top: logo + nav -->
     <div
-      class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-8"
+      class="flex flex-col items-center sm:flex-row sm:items-start sm:justify-between gap-6 mb-8"
     >
-      <!-- Logo -->
-      <div class="md:block flex justify-center md:justify-start">
-        <Logo />
-      </div>
-
-      <!-- Nav -->
-      <div class="md:block flex justify-center">
-        <FooterNavigation />
-      </div>
+      <Logo />
+      <FooterNavigation />
     </div>
 
-    <div class="w-full h-px bg-outline-variant mb-8"></div>
+    <!-- Divider -->
+    <div class="w-full h-px bg-(--outline-variant) mb-6"></div>
 
-    <!-- Bottom -->
+    <!-- Bottom: social + copyright -->
     <div
-      class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between items-center"
+      class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-4"
     >
-      <div class="flex gap-4 justify-center md:justify-start">
+      <div class="flex flex-row gap-4">
         <SocialMediaNavigation />
       </div>
 
       <p
-        class="text-on-surface-variant text-sm tracking-tight text-center md:text-right"
+        class="text-xs tracking-tight text-(--on-surface-variant) text-center sm:text-right"
       >
-        © {year} Saurab Gupta. Crafted with precision.
+        © {year} Saurab Gupta
+        <span class="text-(--outline-variant) mx-1.5">·</span>
+        Crafted with precision
       </p>
     </div>
   </div>

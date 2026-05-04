@@ -10,16 +10,42 @@ import HardDrive from '@lucide/astro/icons/hard-drive';
 import Zap from '@lucide/astro/icons/zap';
 import Globe from '@lucide/astro/icons/globe';
 import Wrench from '@lucide/astro/icons/wrench';
+import BarChart3 from '@lucide/astro/icons/chart-bar';
+import Tags from '@lucide/astro/icons/tags';
+import Search from '@lucide/astro/icons/search';
+import Braces from '@lucide/astro/icons/braces';
+import Activity from '@lucide/astro/icons/activity';
+import MapIcon from '@lucide/astro/icons/map';
+import Cpu from '@lucide/astro/icons/cpu';
+import Repeat from '@lucide/astro/icons/repeat';
+import ClipboardList from '@lucide/astro/icons/clipboard-list';
+import Calendar from '@lucide/astro/icons/calendar';
+import CheckCircle from '@lucide/astro/icons/circle-check';
+import ShoppingCart from '@lucide/astro/icons/shopping-cart';
 
 import { GlassCard } from '$lib/components/ui';
+import type { SkillCategory } from '$lib/types/general.types';
+import type { AstroComponent } from 'node_modules/@lucide/astro/src/types';
 
-const skillGroups = [
+export type Skill = {
+  name: string;
+  icon: AstroComponent;
+};
+
+export type SkillGroup = {
+  category: SkillCategory;
+  skills: Skill[];
+};
+
+const skillGroups:SkillGroup[] = [
   {
     category: 'Backend',
     skills: [
       { name: 'PHP / Laravel', icon: Code },
       { name: 'WordPress (Core/Custom)', icon: Server },
       { name: 'Node.js / Express', icon: Code },
+      { name: 'MySQL / PostgreSQL', icon: Database },
+      { name: 'Woocommere', icon: ShoppingCart },
       { name: 'Redis', icon: Zap },
       { name: 'Memcached', icon: HardDrive },
     ],
@@ -27,11 +53,13 @@ const skillGroups = [
   {
     category: 'Frontend',
     skills: [
-      { name: 'MySQL / PostgreSQL', icon: Database },
+      { name: 'React / Next.js', icon: Code },
+      { name: 'Svelte', icon: Code },
+      { name: 'Astro', icon: Code },
       { name: 'React / Next.js', icon: Code },
       { name: 'TypeScript', icon: Code },
       { name: 'Tailwind CSS', icon: Code },
-      { name: 'Vue.js', icon: Code },
+      { name: 'Bootstrap CSS', icon: Code },
     ],
   },
   {
@@ -43,6 +71,28 @@ const skillGroups = [
       { name: 'Kubernetes', icon: Boxes },
       { name: 'CI/CD Pipelines', icon: Workflow },
       { name: 'Jenkins', icon: Wrench },
+    ],
+  },
+  {
+    category: 'SEO & Analytics',
+    skills: [
+      { name: 'Programmatic SEO', icon: Cpu },
+      { name: 'Google Analytics (GA4)', icon: BarChart3 },
+      { name: 'Google Tag Manager (GTM)', icon: Tags },
+      { name: 'Google Search Console (GSC)', icon: Search },
+      { name: 'XML Sitemap Generation', icon: MapIcon },
+      { name: 'Structured Data (Schema.org)', icon: Braces },
+      { name: 'Technical SEO (CWV, Indexing)', icon: Activity },
+    ],
+  },
+
+  {
+    category: 'Workflow & Collaboration',
+    skills: [
+      { name: 'Agile (Scrum/Kanban)', icon: Repeat },
+      { name: 'Jira (Project Tracking)', icon: ClipboardList },
+      { name: 'Sprint Planning & Estimation', icon: Calendar },
+      { name: 'Code Reviews', icon: CheckCircle },
     ],
   },
   {
@@ -66,7 +116,7 @@ const skillGroups = [
   </div>
 
   <!-- Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
     {skillGroups.map((group) => (
       <GlassCard class="p-5 md:p-6 flex flex-col gap-3" as="div">
         

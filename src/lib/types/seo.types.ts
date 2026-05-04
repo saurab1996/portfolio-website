@@ -5,6 +5,7 @@ export type SEOMeta = {
   keywords?: string;
   ogImage?: string;
   canonical?: string;
+  ogType?: 'website' | 'article';
 };
 
 export type PageSchema = WithContext<Thing>;

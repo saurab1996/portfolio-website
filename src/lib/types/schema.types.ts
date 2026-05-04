@@ -63,11 +63,11 @@ export const pageSchema: Record<string, PageSchema> = {
     },
   },
 
-  '/blog': {
+  '/blogs': {
     '@context': 'https://schema.org',
     '@type': 'Blog',
     name: `Blog — ${SITE_NAME}`,
-    url: `${SITE_URL}/blog`,
+    url: `${SITE_URL}/blogs`,
     author: {
       '@type': 'Person',
       name: SITE_NAME,

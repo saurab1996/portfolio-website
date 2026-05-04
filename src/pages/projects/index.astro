@@ -1,0 +1,23 @@
+---
+import Layout from '$layouts/Layout.astro';
+import Listing from '$lib/components/features/projects/listing.svelte';
+import { ContactCard, HeroHeader } from '$lib/components/ui';
+---
+
+<Layout>
+  <section class="flex flex-col gap-5 md:gap-6 lg:gap-7">
+    <HeroHeader badgeTitle="ENGINEERING PORTFOLIO">
+      <Fragment slot="heading"
+        >Engineering Portfolio.<br />
+        Selected <span class="text-primary">Projects.</span>
+      </Fragment>
+      <Fragment slot="description">
+        A collection of real-world SaaS products and web applications spanning
+        backend systems, APIs, and modern frontend experiences built for
+        performance, scalability, and production reliability.
+      </Fragment>
+    </HeroHeader>
+  </section>
+  <Listing client:load />
+  <ContactCard />
+</Layout>

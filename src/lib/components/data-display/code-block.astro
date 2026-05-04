@@ -1,0 +1,30 @@
+---
+import { CopyButton } from '$lib/components/buttons';
+
+interface Props {
+  lang: string;
+  code: string;
+}
+
+const { lang, code } = Astro.props;
+---
+
+<div
+  class="copy-button-wrapper code-block-wrapper relative border border-border rounded-lg overflow-hidden my-6 transition-[border-color] duration-300"
+>
+  <div
+    class="flex items-center justify-between px-4 py-2 bg-(--surface-container-low) border-b border-border select-none"
+  >
+    <span
+      class="text-xs font-semibold uppercase tracking-widest font-mono text-(--on-surface-variant)"
+    >
+      {lang}
+    </span>
+    <CopyButton codeToCopy={code} client:idle />
+  </div>
+
+  <div
+    class="code-block-content overflow-x-auto copy-content"
+    set:html={code}
+  />
+</div>

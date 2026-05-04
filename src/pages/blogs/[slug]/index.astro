@@ -1,0 +1,155 @@
+---
+import Layout from '$layouts/Layout.astro';
+import { TableOfContents } from '$lib/components/data-display';
+import { Button, ContactCard, HeroHeader, Image } from '$lib/components/ui';
+import type { SEOMeta } from '$lib/types/seo.types';
+import Clock from '@lucide/astro/icons/clock';
+import Calendar from '@lucide/astro/icons/calendar';
+import User from '@lucide/astro/icons/user';
+import { generateBlogImageItem } from '$lib/utils/helpers';
+import { getAllPosts, getPostBySlug, getPostContent } from '$lib/data/posts';
+import { parseBlogHtml } from '$lib/utils/parseBlogHtml';
+import {
+  componentMap,
+  parseSegments,
+  type ComponentName,
+  type ComponentPropsMap,
+} from '$lib/utils/contentSegments';
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const post = await getPostBySlug(slug!);
+
+if (!post) return Astro.redirect('/blogs');
+
+const content = await getPostContent(post.databaseId);
+if (!content) return Astro.redirect('/blogs');
+
+const meta: Partial<SEOMeta> = {
+  title: post.blogFields.metaTitle,
+  description: post.blogFields.metaDescription,
+  ogImage: post?.blogFields?.thumbnailUrl,
+  keywords: post.categories.nodes.map((category) => category.name).join(', '),
+  ogType: 'article',
+};
+const { headings, processedContent } = await parseBlogHtml(content);
+const segments = parseSegments(processedContent);
+---
+
+<Layout {meta}>
+  <section class="grid gap-7 max-lg:gap-0">
+    <div class="flex flex-col gap-2">
+      <HeroHeader badgeTitle="ENGINEERING BLOG" subHeadingAs="div">
+        <Fragment slot="heading">
+          {post.title}
+        </Fragment>
+        <Fragment slot="subHeading">
+          <div class="flex flex-wrap gap-2">
+            {
+              post.categories.nodes.map((category) => (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  class="text-[11px] font-semibold tracking-wider uppercase"
+                >
+                  {category.name}
+                </Button>
+              ))
+            }
+          </div>
+        </Fragment>
+        <div
+          slot="description"
+          class="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-outline-variant pt-4 mb-4"
+        >
+          {
+            post?.author?.node && (
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="text-muted-foreground text-sm md:text-base">
+                  Written by:{' '}
+                </span>
+                <User size={16} class="text-primary shrink-0" />
+                <span class="text-sm md:text-base font-medium text-on-surface truncate">
+                  {post.author.node.firstName} {post.author.node.lastName}
+                </span>
+              </div>
+            )
+          }
+
+          <time
+            datetime={post.modifiedGmt}
+            class="text-sm md:text-base text-on-surface-variant flex items-center gap-1.5 shrink-0"
+          >
+            <Calendar size={16} class="text-primary" />
+            {
+              new Date(post.modifiedGmt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })
+            }
+          </time>
+
+          {
+            post.blogFields?.readTime && (
+              <div class="flex items-center gap-1.5 shrink-0 text-sm md:text-base text-on-surface-variant">
+                <Clock size={16} class="text-primary" />
+                <span>{post.blogFields.readTime} read</span>
+              </div>
+            )
+          }
+        </div>
+      </HeroHeader>
+    </div>
+    <figure class="overflow-hidden rounded-field mb-7">
+      <Image
+        full={generateBlogImageItem(
+          post.blogFields.thumbnailFullImageUrl,
+          post.blogFields.thumbnailAlt,
+          'full',
+        )}
+        thumbnail={generateBlogImageItem(
+          post.blogFields.thumbnailUrl,
+          post.blogFields.thumbnailAlt,
+          'thumbnail',
+        )}
+        mainImg="full"
+        class="rounded-lg"
+      />
+    </figure>
+    <div class="full-width bg-surface-container-low">
+      <div class="content-width p-5 md:p-6">
+        <TableOfContents headings={headings} />
+      </div>
+    </div>
+    <article id="content" class="article-content space-y-4 md:space-y-6">
+      {
+        segments.map((segment) => {
+          if (segment.type === 'html')
+            return <Fragment set:html={segment.content} />;
+
+          const name = segment.name as ComponentName;
+          const Component = componentMap[name] as any;
+
+          if (!Component) return JSON.stringify(segment);
+
+          const props = segment.props as ComponentPropsMap[typeof name];
+          return <Component {...props} />;
+        })
+      }
+    </article>
+  </section>
+  <ContactCard
+    title="Want to discuss an architecture challenge?"
+    subtitle="If any of these articles sparked questions about your own systems — scaling, performance, or API design — I'm happy to talk through it."
+    ctaText="Get in touch"
+  />
+</Layout>
+<TableOfContents client:load headings={headings} variant="popover" />

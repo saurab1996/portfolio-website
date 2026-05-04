@@ -1,0 +1,32 @@
+---
+import Layout from '$layouts/Layout.astro';
+import Listing from '$lib/components/features/blog/listing.svelte';
+import { ContactCard, HeroHeader } from '$lib/components/ui';
+import { getFilteredPosts, getAllCategories } from '$lib/data/posts';
+
+const [initialPosts, categories] = await Promise.all([
+  getFilteredPosts('all-blogs', 6),
+  getAllCategories(),
+]);
+---
+
+<Layout>
+  <section class="flex flex-col gap-8 md:gap-10 lg:gap-12">
+    <HeroHeader badgeTitle="ENGINEERING BLOG">
+      <Fragment slot="heading">
+        Technical Writing.<br />
+        Deep Dives & <span class="text-primary">Insights.</span>
+      </Fragment>
+      <Fragment slot="description">
+        Articles on software architecture, server-side performance optimization,
+        scaling APIs, and real-world full-stack development challenges.
+      </Fragment>
+    </HeroHeader>
+  </section>
+
+  <Listing {initialPosts} {categories} client:load />
+
+  <section>
+    <ContactCard />
+  </section>
+</Layout>

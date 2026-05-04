@@ -2,10 +2,10 @@
 import { Button } from '$lib/components/ui';
 
 const navLinks = [
-  { href: '/about', label: 'ABOUT' },
-  { href: '/technical', label: 'STACK' },
+  // { href: '/about', label: 'ABOUT' },
+  // { href: '/technical', label: 'STACK' },
   { href: '/projects', label: 'PROJECTS' },
-  { href: '/blog', label: 'BLOG' },
+  { href: '/blogs', label: 'BLOG' },
   { href: '/contact', label: 'CONTACT' },
 ];
 ---
@@ -16,7 +16,7 @@ const navLinks = [
       <Button
         variant="nav"
         href={link.href}
-        class="text-on-surface-variant hover:text-primary"
+        class="text-foreground hover:text-primary"
       >
         {link.label}
       </Button>

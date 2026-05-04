@@ -1,5 +1,7 @@
 // ─── Primitives ───────────────────────────────────────────────────────────────
 
+import type { SkillCategory, ImageItem } from '$lib/types/general.types';
+
 export interface LabelDetail {
   label: string;
   detail: string;
@@ -26,8 +28,7 @@ export interface ProjectHeader {
   title: string;
   role: string;
   meta: MetaItem[];
-  liveLink: LiveLink | null;
-  visualSuggestion: string | null;
+  liveLink: LiveLink;
 }
 
 // ─── Summary ──────────────────────────────────────────────────────────────────
@@ -140,7 +141,7 @@ export type SectionType = ProjectSection['type'];
 // ─── Tech Stack ───────────────────────────────────────────────────────────────
 
 export interface TechStack {
-  category: string | null;
+  category: SkillCategory;
   items: string[];
 }
 
@@ -148,14 +149,15 @@ export interface TechStack {
 
 export interface CTA {
   heading: string;
-  buttonLabel: string;
 }
 
 // ─── Project (unified) ────────────────────────────────────────────────────────
 
 export interface Project {
   id: string;
+  oneLiner: string;
   header: ProjectHeader;
+  visualSuggestion: ImageItem;
   summary: ProjectSummary;
   sections: ProjectSection[];
   techStack: TechStack[];

@@ -1,10 +1,11 @@
 ---
 // SEO.astro
-import { SITE_URL, CDN_URL } from "$lib/config";
-import { FAVICON_URL } from "$lib/data/cdn-assets";
-import { pageMeta, defaultMeta } from "$lib/data/seo";
-import type { SEOMeta } from "$lib/types/seo.types";
-const currentPath = Astro.url.pathname;
+import { SITE_URL, CDN_URL, SITE_NAME } from '$lib/config';
+import { FAVICON_URL } from '$lib/data/cdn-assets';
+import { pageMeta, defaultMeta, DEFAULT_OG_IMAGE } from '$lib/data/seo';
+import type { SEOMeta } from '$lib/types/seo.types';
+const fullUrl = Astro.url.href;
+const currentPath = new URL(fullUrl).pathname;
 interface Props {
   override?: Partial<SEOMeta>;
 }
@@ -12,34 +13,44 @@ interface Props {
 const { override }: Props = Astro.props;
 const base = pageMeta[currentPath] ?? defaultMeta;
 const meta: SEOMeta = { ...base, ...override };
+const ogImage = meta?.ogImage || DEFAULT_OG_IMAGE;
 ---
 
 <title>{meta.title}</title>
 <meta name="description" content={meta.description} />
-
 {meta.keywords && <meta name="keywords" content={meta.keywords} />}
-
 <link rel="canonical" href={meta.canonical ?? `${SITE_URL}${currentPath}`} />
 
+<meta
+  name="robots"
+  content={'index, follow, max-image-preview:large, max-snippet:-1'}
+/>
+<meta name="googlebot" content="index, follow" />
+
+<meta property="og:site_name" content={SITE_NAME} />
 <meta property="og:title" content={meta.title} />
 <meta property="og:description" content={meta.description} />
 <meta property="og:url" content={`${SITE_URL}${currentPath}`} />
-<meta property="og:type" content="website" />
-{
-  meta.ogImage && (
-    <meta property="og:image" content={`${CDN_URL}${meta.ogImage}`} />
-  )
-}
+<meta property="og:type" content={meta.ogType ?? 'website'} />
+<meta property="og:image" content={`${CDN_URL}${ogImage}`} />
+<meta property="og:locale" content="en_US" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={meta.title} />
 <meta name="twitter:description" content={meta.description} />
-{
-  meta.ogImage && (
-    <meta name="twitter:image" content={`${CDN_URL}${meta.ogImage}`} />
-  )
-}
+<meta name="twitter:image" content={`${CDN_URL}${ogImage}`} />
 
 <link rel="icon" href={`${CDN_URL}${FAVICON_URL}`} />
 <link rel="apple-touch-icon" href={`${CDN_URL}${FAVICON_URL}`} />
 <meta name="msapplication-TileImage" content={`${CDN_URL}${FAVICON_URL}`} />
+<meta
+  name="theme-color"
+  content="#ffffff"
+  media="(prefers-color-scheme: light)"
+/>
+
+<meta
+  name="theme-color"
+  content="#0a0a0a"
+  media="(prefers-color-scheme: dark)"
+/>

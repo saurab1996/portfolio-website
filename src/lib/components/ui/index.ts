@@ -21,3 +21,6 @@ export { default as ExternalLink } from '$lib/components/ui/external-link.svelte
 export { default as Input } from '$lib/components/ui/input.svelte';
 export { default as Textarea } from '$lib/components/ui/textarea.svelte';
 export { default as Label } from '$lib/components/ui/label.svelte';
+export { default as Image } from '$lib/components/ui/image.svelte';
+export { default as ContactCard } from '$lib/components/ui/contact-card.astro';
+export { default as HeroHeader } from '$lib/components/ui/hero-header.astro';

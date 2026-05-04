@@ -1,0 +1,24 @@
+---
+import Layout from '$layouts/Layout.astro';
+import Contact from '$lib/components/features/home/contact.astro';
+import { HeroHeader } from '$lib/components/ui';
+---
+
+<Layout>
+  <section class="flex flex-col gap-5 md:gap-6 lg:gap-7">
+    <HeroHeader badgeTitle="CONTACT">
+      <Fragment slot="heading">
+        Let’s Build Something<br />
+        <span class="text-primary">Scalable.</span>
+      </Fragment>
+      <Fragment slot="subHeading">
+        Backend systems, SaaS platforms, and performance-driven web engineering.
+      </Fragment>
+      <Fragment slot="description">
+        Open to discussing new builds, scaling challenges, or system
+        architecture. Let’s connect and make it production-ready.
+      </Fragment>
+    </HeroHeader>
+  </section>
+  <Contact showTitle={false} />
+</Layout>
