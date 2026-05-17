@@ -2,6 +2,7 @@ import type { Project } from '$lib/types/project.types';
 
 export const graphinaProject: Project = {
   id: 'graphina',
+  projectType: 'Product',
   oneLiner:
     'Built and scaled a WordPress charting system for dynamic data visualization. Integrated across Elementor, Divi, and Gutenberg with a focus on performance and flexibility.',
   header: {
@@ -20,14 +21,10 @@ export const graphinaProject: Project = {
     full: {
       url: '/images/project/graphina-banner.webp',
       alt: 'Graphina project banner',
-      height: 500,
-      width: 1544,
     },
     thumbnail: {
       url: '/images/project/graphina-banner-thumbnail.webp',
       alt: 'Graphina project thumbnail',
-      height: 249,
-      width: 768,
     },
   },
   summary: {

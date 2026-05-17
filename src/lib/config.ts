@@ -10,3 +10,4 @@ export const SITE_NAME = 'Saurab Gupta — Full-Stack Developer & Team Lead';
 export const GITHUB_ADDRESS = 'https://github.com/saurab1996';
 export const SITE_DESC =
   'Full-Stack Developer & Team Lead with 5+ years building high-performance web apps, scalable APIs, and multi-country platforms.';
+export const POST_LIST_JSON_FILE = 'post-list.json'; //also update fetch-posts.ts

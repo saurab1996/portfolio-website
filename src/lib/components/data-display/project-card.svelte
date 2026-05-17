@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Project } from '$lib/types/project.types';
   import { ExternalLink, GlassCard, Image } from '$lib/components/ui';
+  import { generateImageItem } from '$lib/utils/helpers';
   interface Props {
     project: Project;
   }
@@ -18,8 +19,16 @@
     <div class="aspect-16/10 h-full">
       <Image
         mainImg="thumbnail"
-        full={project.visualSuggestion.full}
-        thumbnail={project.visualSuggestion.thumbnail}
+        full={generateImageItem(
+          project.visualSuggestion.full.url,
+          project.visualSuggestion.full.alt,
+          'full',
+        )}
+        thumbnail={generateImageItem(
+          project.visualSuggestion.thumbnail.url,
+          project.visualSuggestion.thumbnail.alt,
+          'thumbnail',
+        )}
         class="h-full w-full"
       />
     </div>

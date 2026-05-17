@@ -2,6 +2,7 @@ import type { Project } from '$lib/types/project.types';
 
 export const kivicareProject: Project = {
   id: 'kivicare',
+  projectType: 'Product',
   oneLiner:
     'A healthcare management platform designed for patient records, appointments, and billing operations for WordPress Ecosystems',
   header: {
@@ -17,14 +18,10 @@ export const kivicareProject: Project = {
     full: {
       url: '/images/project/kivicare-banner.webp',
       alt: 'Kivicare project banner',
-      height: 500,
-      width: 1544,
     },
     thumbnail: {
       url: '/images/project/kivicare-banner-thumbnail.webp',
       alt: 'Kivicare project thumbnail',
-      height: 249,
-      width: 768,
     },
   },
   summary: {

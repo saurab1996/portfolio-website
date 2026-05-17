@@ -2,58 +2,68 @@
   import { ProjectCard } from '$lib/components/data-display';
   import Button from '$lib/components/ui/button.svelte';
   import { projects } from '$lib/data/projects';
+  import { flip } from 'svelte/animate';
 
-  const categorys = projects.reduce((acc, project) => {
-    if (!acc.has('All Projects')) {
-      acc.set('All Projects', []);
-    }
-    acc.get('All Projects').push(project.id);
+  // Define categories to exclude from the filter list
+  const EXCLUDED_CATEGORIES = [
+    'Tools & Version Control',
+    'Integrations',
+    'SEO & Analytics',
+  ];
 
-    for (const { category } of project.techStack) {
-      if (
-        ['Tools & Version Control', 'Integrations'].includes(category || '')
-      ) {
-        continue;
+  const categoryMap = projects.reduce((acc, project) => {
+    // 1. Add "All"
+    if (!acc.has('All')) acc.set('All', []);
+    acc.get('All').push(project.id);
+
+    // 2. Filter by Project Type (The "What")
+    const type = project.projectType;
+    if (!acc.has(type)) acc.set(type, []);
+    acc.get(type).push(project.id);
+
+    // 3. Filter by Tech Stack (The "How")
+    project.techStack.forEach(({ category }) => {
+      if (category && !EXCLUDED_CATEGORIES.includes(category)) {
+        if (!acc.has(category)) acc.set(category, []);
+        // Prevent duplicate IDs if a project type and tech category share a name
+        if (!acc.get(category).includes(project.id)) {
+          acc.get(category).push(project.id);
+        }
       }
-      const list = acc.get(category);
-
-      if (list) {
-        list.push(project.id);
-      } else {
-        acc.set(category, [project.id]);
-      }
-    }
+    });
 
     return acc;
   }, new Map());
 
-  let activeCategory = $state('All Projects');
-  const selectCategoryProjectIds = $derived(
-    categorys.get(activeCategory),
-  ) as string[];
+  let activeCategory = $state('All');
+
+  // Derived state for the grid
+  const visibleProjectIds = $derived(categoryMap.get(activeCategory) || []);
 </script>
 
-<section class="flex flex-col gap-5 md:gap-6 lg:gap-7">
+<section class="flex flex-col gap-6">
+  <!-- Filter Bar -->
   <div
-    class="bg-surface-container-low rounded-lg p-2 flex flex-wrap gap-2 items-center"
+    class="bg-surface-container-low rounded-xl p-1.5 flex flex-wrap gap-1 items-center border border-outline/10"
   >
-    {#each categorys.keys() as f}
+    {#each Array.from(categoryMap.keys()) as category}
       <Button
-        variant={activeCategory === f ? 'surface' : 'ghost'}
+        variant={activeCategory === category ? 'surface' : 'ghost'}
         size="sm"
-        aria-pressed={activeCategory === f}
-        onclick={() => (activeCategory = f)}
-        class="text-[11px] font-semibold tracking-wider uppercase"
+        onclick={() => (activeCategory = category)}
+        class="text-[10px] md:text-[11px] font-bold tracking-widest uppercase transition-all duration-200"
       >
-        {f}
+        {category}
       </Button>
     {/each}
   </div>
-  <div class="grid grid-cols-1 gap-6 md:gap-8">
-    {#each projects as project}
-      {#if selectCategoryProjectIds.includes(project.id)}
+
+  <!-- Project Grid -->
+  <div class="grid grid-cols-1 gap-8">
+    {#each projects.filter( (p) => visibleProjectIds.includes(p.id), ) as project (project.id)}
+      <div animate:flip={{ duration: 300 }}>
         <ProjectCard {project} />
-      {/if}
+      </div>
     {/each}
   </div>
 </section>

@@ -2,6 +2,7 @@ import type { Project } from '$lib/types/project.types';
 
 export const instaremProject: Project = {
   id: 'instarem',
+  projectType: 'Enterprise',
   oneLiner:
     'A multi-region fintech marketing website powering large-scale SEO, localized content, and high-performance user journeys.',
 
@@ -27,14 +28,10 @@ export const instaremProject: Project = {
     full: {
       url: '/images/project/instarem-banner.webp',
       alt: 'Instarem project banner',
-      height: 500,
-      width: 1544,
     },
     thumbnail: {
       url: '/images/project/instarem-banner-thumbnail.webp',
       alt: 'Instarem project thumbnail',
-      height: 249,
-      width: 768,
     },
   },
   summary: {

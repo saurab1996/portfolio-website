@@ -21,10 +21,10 @@ export default defineConfig({
   integrations: [
     svelte(),
     compressor({
-      gzip: false,
-      brotli: true,
+      gzip: true,
+      brotli: false,
       zstd: false,
-      fileExtensions: ['.html'],
+      fileExtensions: ['.html', '.json'],
     }),
   ],
   compressHTML: true,
@@ -51,6 +51,7 @@ export default defineConfig({
         build: {
           rollupOptions: {
             output: {
+              manualChunks: () => 'app',
               // path names relative to `outDir`
               entryFileNames: 'js/[name]-[hash].js',
               chunkFileNames: 'js/chunks/[name]-[hash].js',

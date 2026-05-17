@@ -40,30 +40,3 @@ import { Button } from '$lib/components/ui';
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
   </svg>
 </Button>
-
-<script>
-  const toggle = document.getElementById('theme-toggle')!;
-  console.log(toggle);
-  const sun = document.getElementById('icon-sun')!;
-  const moon = document.getElementById('icon-moon')!;
-  const root = document.documentElement;
-
-  // Sync icon with current theme on load
-  const updateIcons = () => {
-    const isDark = root.classList.contains('dark');
-    sun.classList.toggle('hidden', !isDark);
-    moon.classList.toggle('hidden', isDark);
-  };
-
-  // Toggle theme on click
-  toggle.addEventListener('click', () => {
-    root.classList.toggle('dark');
-    localStorage.setItem(
-      'theme',
-      root.classList.contains('dark') ? 'dark' : 'light',
-    );
-    updateIcons();
-  });
-
-  updateIcons();
-</script>

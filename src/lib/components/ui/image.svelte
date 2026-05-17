@@ -1,10 +1,6 @@
 <script lang="ts">
-  import {
-    FULL_SIZE_PLACEHOLDER_IMG,
-    THUMBNAIL_SIZE_PLACEHOLDER_IMG,
-  } from '$lib/data/cdn-assets';
   import type { ImageItem, ImageSize } from '$lib/types/general.types';
-  import { cdnImgUrl } from '$lib/utils/helpers';
+  import { cdnImgUrl, defaultImg } from '$lib/utils/helpers';
   import type { HTMLImgAttributes } from 'svelte/elements';
 
   interface Props extends ImageItem, HTMLImgAttributes {
@@ -45,12 +41,6 @@
       ? '(max-width: 768px) 100vw, 1020px'
       : '(max-width: 768px) 100vw, 400px',
   );
-
-  const onErrorImg = $derived(
-    mainImg === 'thumbnail'
-      ? THUMBNAIL_SIZE_PLACEHOLDER_IMG
-      : FULL_SIZE_PLACEHOLDER_IMG,
-  );
 </script>
 
 {#if url}
@@ -64,7 +54,11 @@
     loading={priority ? 'eager' : 'lazy'}
     fetchpriority={priority ? 'high' : 'auto'}
     decoding="async"
-    onerror={(e) => ((e.currentTarget as HTMLImageElement).src = onErrorImg)}
+    onerror={(e) => {
+      const target = e.currentTarget as HTMLImageElement;
+      target.srcset = ''; // Clear the broken responsive sources
+      target.src = defaultImg(); // Set the fallback
+    }}
     class={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${className ?? ''}`}
     {...restProps}
   />

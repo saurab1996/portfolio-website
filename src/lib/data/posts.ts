@@ -5,25 +5,31 @@
  * Import these helpers anywhere in your Astro pages / components.
  */
 
-import { CDN_URL, DEV_MODE } from '$lib/config';
-import type { Category, Post, PostsData } from '$lib/types/post.types';
+import { CDN_URL, DEV_MODE, POST_LIST_JSON_FILE } from '$lib/config';
+import type {
+  Category,
+  Post,
+  PostContent,
+  PostList,
+  PostsData,
+} from '$lib/types/post.types';
 
 export const POSTS_PER_PAGE = 6;
 
-let cache: Promise<Post[]> | null = null;
+let cache: Promise<PostList[]> | null = null;
 
-export const getPostContent = async (id: number): Promise<string> =>
+export const getPostContent = async (slug: string): Promise<PostContent> =>
   import('fs').then(({ readFileSync }) =>
     import('path').then(({ resolve }) => {
       const raw = readFileSync(
-        resolve(`public/data/posts-content/${id}.json`),
+        resolve(`local-data/posts-content/${slug}.json`),
         'utf-8',
       );
-      return (JSON.parse(raw) as { content: string }).content;
+      return JSON.parse(raw);
     }),
   );
 
-function loadPosts(): Promise<Post[]> {
+function loadPosts(): Promise<PostList[]> {
   if (cache) return cache;
 
   if (typeof window === 'undefined') {
@@ -31,7 +37,10 @@ function loadPosts(): Promise<Post[]> {
     cache = import('fs')
       .then(({ readFileSync }) =>
         import('path').then(({ resolve }) => {
-          const raw = readFileSync(resolve('public/data/posts.json'), 'utf-8');
+          const raw = readFileSync(
+            resolve(`public/data/${POST_LIST_JSON_FILE}`),
+            'utf-8',
+          );
           return (JSON.parse(raw) as PostsData).posts;
         }),
       )
@@ -40,7 +49,9 @@ function loadPosts(): Promise<Post[]> {
         throw err;
       });
   } else {
-    const URL = DEV_MODE ? '/data/posts.json' : `${CDN_URL}/data/posts.json`;
+    const URL = DEV_MODE
+      ? '/data/posts.json'
+      : `${CDN_URL}/data/${POST_LIST_JSON_FILE}`;
     // Client — fetch the static file
     cache = fetch(URL)
       .then((res) => {
@@ -66,6 +77,23 @@ export async function getPostBySlug(slug: string) {
   return posts.find((p) => p.slug === slug);
 }
 
+export async function fetchFullPost(slug: string): Promise<Post | null> {
+  const [postList, postContent] = await Promise.all([
+    getPostBySlug(slug),
+    getPostContent(slug),
+  ]);
+
+  if (!postList || !postContent) return null;
+
+  return {
+    ...postList,
+    ...postContent,
+    blogFields: {
+      ...postList.blogFields,
+      ...postContent.blogFields,
+    },
+  };
+}
 export async function getFilteredPosts(categorySlug: string, limit?: number) {
   const posts = await loadPosts();
   const filtered =

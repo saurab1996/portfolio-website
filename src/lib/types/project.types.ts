@@ -1,6 +1,8 @@
 // ─── Primitives ───────────────────────────────────────────────────────────────
 
-import type { SkillCategory, ImageItem } from '$lib/types/general.types';
+import type { SkillCategory, ImageSize } from '$lib/types/general.types';
+
+export type ProjectType = 'Product' | 'Tooling' | 'Open Source' | 'Enterprise';
 
 export interface LabelDetail {
   label: string;
@@ -153,11 +155,18 @@ export interface CTA {
 
 // ─── Project (unified) ────────────────────────────────────────────────────────
 
+export type visualSuggestion = {
+  [key in ImageSize]: {
+    url: string;
+    alt: string;
+  };
+};
 export interface Project {
   id: string;
+  projectType: ProjectType;
   oneLiner: string;
   header: ProjectHeader;
-  visualSuggestion: ImageItem;
+  visualSuggestion: visualSuggestion;
   summary: ProjectSummary;
   sections: ProjectSection[];
   techStack: TechStack[];

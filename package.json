@@ -6,11 +6,12 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "npm run fetch:posts  && astro dev",
+    "dev:fetch": "npm run fetch:posts  && astro dev",
+    "dev": "astro dev",
     "start": "astro dev",
-    "fetch:posts": "node fetch-posts.mjs",
-    "delete:html": "find build -type f -name '*.html' -delete",
-    "build": "npm run fetch:posts && astro build && npm run delete:html",
+    "fetch:posts": "node fetch-posts.ts",
+    "delete:html:json": "find build -type f \\( -name '*.html' -o -name '*.json' \\) -delete",
+    "build": "npm run fetch:posts && astro build && npm run delete:html:json",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write ."

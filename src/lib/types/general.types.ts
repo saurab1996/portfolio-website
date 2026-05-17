@@ -32,12 +32,13 @@ export type SkillCategory =
   | 'WordPress'
   | 'Version Control'
   | 'SEO & Analytics'
-  | 'Workflow & Collaboration';
+  | 'Workflow & Collaboration'
+  | 'Open-Source';
 
 export type ImageSize = 'full' | 'thumbnail';
 
 export type ImageItem = {
-  [key in ImageSize]?: {
+  [key in ImageSize]: {
     url: string;
     alt: string;
     height: number;

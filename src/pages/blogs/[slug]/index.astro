@@ -6,8 +6,8 @@ import type { SEOMeta } from '$lib/types/seo.types';
 import Clock from '@lucide/astro/icons/clock';
 import Calendar from '@lucide/astro/icons/calendar';
 import User from '@lucide/astro/icons/user';
-import { generateBlogImageItem } from '$lib/utils/helpers';
-import { getAllPosts, getPostBySlug, getPostContent } from '$lib/data/posts';
+import { generateImageItem } from '$lib/utils/helpers';
+import { getAllPosts, fetchFullPost } from '$lib/data/posts';
 import { parseBlogHtml } from '$lib/utils/parseBlogHtml';
 import {
   componentMap,
@@ -25,12 +25,9 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-const post = await getPostBySlug(slug!);
+const post = await fetchFullPost(slug);
 
 if (!post) return Astro.redirect('/blogs');
-
-const content = await getPostContent(post.databaseId);
-if (!content) return Astro.redirect('/blogs');
 
 const meta: Partial<SEOMeta> = {
   title: post.blogFields.metaTitle,
@@ -39,7 +36,8 @@ const meta: Partial<SEOMeta> = {
   keywords: post.categories.nodes.map((category) => category.name).join(', '),
   ogType: 'article',
 };
-const { headings, processedContent } = await parseBlogHtml(content);
+
+const { headings, processedContent } = await parseBlogHtml(post.content);
 const segments = parseSegments(processedContent);
 ---
 
@@ -110,18 +108,20 @@ const segments = parseSegments(processedContent);
     </div>
     <figure class="overflow-hidden rounded-field mb-7">
       <Image
-        full={generateBlogImageItem(
+        full={generateImageItem(
           post.blogFields.thumbnailFullImageUrl,
           post.blogFields.thumbnailAlt,
           'full',
         )}
-        thumbnail={generateBlogImageItem(
+        thumbnail={generateImageItem(
           post.blogFields.thumbnailUrl,
           post.blogFields.thumbnailAlt,
           'thumbnail',
         )}
         mainImg="full"
         class="rounded-lg"
+        loading="eager"
+        fetchpriority="high"
       />
     </figure>
     <div class="full-width bg-surface-container-low">
@@ -147,8 +147,8 @@ const segments = parseSegments(processedContent);
     </article>
   </section>
   <ContactCard
-    title="Want to discuss an architecture challenge?"
-    subtitle="If any of these articles sparked questions about your own systems — scaling, performance, or API design — I'm happy to talk through it."
+    title={post.blogFields.getInTouchCta}
+    subtitle={post.blogFields.getInTouchCtaDescription}
     ctaText="Get in touch"
   />
 </Layout>

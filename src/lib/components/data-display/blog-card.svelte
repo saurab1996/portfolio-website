@@ -4,7 +4,7 @@
   import Calendar from '@lucide/svelte/icons/calendar';
   import User from '@lucide/svelte/icons/user';
   import type { Post } from '$lib/types/post.types';
-  import { blogPageUrl, generateBlogImageItem } from '$lib/utils/helpers';
+  import { blogPageUrl, generateImageItem } from '$lib/utils/helpers';
 
   interface Props {
     post: Post;
@@ -21,12 +21,12 @@
   <!-- Image -->
   <div class="aspect-video w-full overflow-hidden">
     <Image
-      full={generateBlogImageItem(
+      full={generateImageItem(
         post.blogFields.thumbnailFullImageUrl,
         post.blogFields.thumbnailAlt,
         'full',
       )}
-      thumbnail={generateBlogImageItem(
+      thumbnail={generateImageItem(
         post.blogFields.thumbnailUrl,
         post.blogFields.thumbnailAlt,
         'thumbnail',

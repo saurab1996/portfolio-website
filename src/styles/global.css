@@ -4,15 +4,13 @@
 
 @font-face {
   font-family: 'Inter Variable';
-  src: url(https://cdn.saurabgupta.in/fonts/inter-v20-latin-regular.woff2)
-    format('woff2');
+  src: url(/fonts/inter-v20-latin-regular.woff2) format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter Variable';
-  src: url(https://cdn.saurabgupta.in/fonts/inter-v20-latin-700.woff2)
-    format('woff2');
+  src: url(/fonts/inter-v20-latin-700.woff2) format('woff2');
   font-weight: 700;
   font-display: swap;
 }
@@ -130,7 +128,7 @@
   --card-foreground: rgb(10 10 10);
   --popover: rgb(255 255 255);
   --popover-foreground: rgb(10 10 10);
-  --primary: rgb(62 64 200); /* same in both modes */
+  --primary: hwb(239 24% 22%); /* same in both modes */
   --primary-foreground: rgb(255 255 255); /* same in both modes */
   --secondary: rgb(245 245 245);
   --secondary-foreground: rgb(26 26 26);
@@ -424,6 +422,60 @@
   /* Override for specialized component links (e.g., cards, nav, TOC) */
   a.no-underline {
     @apply no-underline;
+  }
+  .wp-block-table {
+    @apply overflow-x-auto my-6 rounded-lg border border-[var(--border)];
+  }
+
+  table {
+    @apply w-full border-collapse text-sm text-[var(--foreground)] bg-[var(--card)];
+  }
+
+  thead tr {
+    background: linear-gradient(
+      135deg,
+      var(--color-md-primary) 0%,
+      var(--color-md-primary-container) 100%
+    );
+  }
+
+  thead th {
+    @apply px-5 py-3.5 text-left text-xs font-bold tracking-tight text-[var(--primary-foreground)] uppercase;
+  }
+
+  thead th:first-child {
+    @apply rounded-tl-lg;
+  }
+
+  thead th:last-child {
+    @apply rounded-tr-lg;
+  }
+
+  tbody tr {
+    @apply border-b border-[var(--border)] hover:bg-[var(--accent)] transition-colors duration-200;
+  }
+
+  tbody tr:nth-child(even) {
+    @apply bg-[var(--muted)];
+  }
+
+  tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  tbody td {
+    @apply px-5 py-3.5 border-r border-[var(--border)];
+  }
+
+  tbody td:first-child {
+    @apply font-semibold text-[var(--muted-foreground)];
+  }
+
+  tbody td:last-child {
+    @apply border-r-0;
+  }
+  td code {
+    @apply bg-[var(--surface-container-low)] text-[var(--on-surface)] border border-[var(--outline-variant)] px-1.5 py-0.5 rounded-sm text-[0.82em] font-medium;
   }
 }
 

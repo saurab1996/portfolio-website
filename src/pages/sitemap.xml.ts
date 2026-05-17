@@ -5,7 +5,7 @@ import { getAllPosts } from '$lib/data/posts';
 
 const lastmod: Record<string, string> = {
   '/': '2025-04-26',
-  '/projects': '2025-04-29',
+  '/projects': '2025-05-15',
   '/contact': '2025-04-29',
   '/blogs': '2025-05-03',
 };

@@ -1,0 +1,67 @@
+{
+  "generatedAt": "2026-05-17T11:23:58.793Z",
+  "total": 2,
+  "posts": [
+    {
+      "title": "High-performance PHP autoloading with O(1) classmaps",
+      "excerpt": "<p>Stop letting your autoloader crawl your filesystem. Discover how switching from O(N) discovery to O(1) lookups can shave milliseconds off every request.</p>\n",
+      "slug": "high-performance-php-autoloading-with-o1-classmaps",
+      "modifiedGmt": "2026-05-17T11:22:56",
+      "databaseId": 78,
+      "categories": {
+        "nodes": [
+          {
+            "name": "Performance"
+          },
+          {
+            "name": "PHP"
+          }
+        ]
+      },
+      "author": {
+        "node": {
+          "firstName": "Saurab",
+          "lastName": "Gupta"
+        }
+      },
+      "blogFields": {
+        "readTime": "7 mins",
+        "thumbnailAlt": "High-performance PHP autoloading infographic banner showing speed and efficiency concepts.",
+        "thumbnailFullImageUrl": "/images/blog/php-classmap-watcher.webp",
+        "thumbnailUrl": "/images/blog/php-classmap-watcher-thumbnail.webp"
+      }
+    },
+    {
+      "title": "Streaming Database Results in WordPress: How to Fetch Millions of Rows Without Crashing PHP",
+      "excerpt": "<p>Learn how to bypass the memory overhead of the native $wpdb class by using streaming queries for high-performance database retrieval.</p>\n",
+      "slug": "wordpress-unbuffered-queries-mysqli-stream",
+      "modifiedGmt": "2026-05-16T17:53:08",
+      "databaseId": 36,
+      "categories": {
+        "nodes": [
+          {
+            "name": "Performance"
+          },
+          {
+            "name": "PHP"
+          },
+          {
+            "name": "WordPress"
+          }
+        ]
+      },
+      "author": {
+        "node": {
+          "firstName": "Saurab",
+          "lastName": "Gupta"
+        }
+      },
+      "blogFields": {
+        "readTime": "4 mins",
+        "thumbnailAlt": "WordPress unbuffered queries mysqli stream",
+        "thumbnailFullImageUrl": "/images/blog/wp-mysqli-stream.webp",
+        "thumbnailUrl": "/images/blog/wp-mysqli-stream-thumbnail.webp"
+      }
+    }
+  ]
+}
